@@ -7,6 +7,8 @@ Created on Wed Feb  5 11:12:53 2020
 """
 
 from .img_to_array import img_to_array
+from .img_brain_mask import compute_brain_mask
 
 
-__all__ = ['img_to_array']
+__all__ = ['img_to_array',
+           'compute_brain_mask']
