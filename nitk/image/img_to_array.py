@@ -48,7 +48,7 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
     >>> from  nitk.image import img_to_array
     >>> import glob
     >>> img_filenames = glob.glob("/neurospin/psy/start-icaar-eugei/derivatives/cat12/vbm/sub-*/ses-*/mri/mwp1sub*.nii")
-    >>> imgs_arr, df, ref_img = img_to_array(img_filenames, check_same_referential=True, expected=dict())
+    >>> imgs_arr, df, ref_img = img_to_array(img_filenames)
     >>> print(imgs_arr.shape)
     (171, 1, 121, 145, 121)
     >>> print(df.shape)
