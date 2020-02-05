@@ -80,7 +80,7 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
         assert np.all([np.all(img.affine == ref_img.affine) for img in imgs_nii])
         assert np.all([np.all(img.get_data().shape == ref_img.get_data().shape) for img in imgs_nii])
 
-    # Load image subjects x chanels (1) x image
+    # Load image subjects x channels (1) x image
     imgs_arr = np.stack([np.expand_dims(img.get_data(), axis=0) for img in imgs_nii])
 
     return imgs_arr, df, ref_img
@@ -89,7 +89,7 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(epilog=img_to_array.__doc__.split('\n')[1].strip())
-    parser.add_argument('--input', help='list of niftii images', nargs='+', type=str)
+    parser.add_argument('--input', help='list of niftii images', nargs='+', required=True, type=str)
     parser.add_argument('-o', '--output', help='output prefix for csv file', type=str)
     options = parser.parse_args()
 
