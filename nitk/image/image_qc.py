@@ -72,6 +72,7 @@ if __name__ == "__main__":
     parser.add_argument('--mask', help='A list of .nii masks or a single .nii mask', nargs='+', type=str)
     parser.add_argument('--output_csv', help='The output path to the .csv file', nargs=1, default='mean_cor.csv', type=str)
     parser.add_argument('--output_pdf', help='The output path to the .pdf file', nargs=1, default='nii_plottings.pdf', type=str)
+    parser.add_argument('--limit', help='The max number of slice to plot', default=50, type=int)
 
     options = parser.parse_args()
     img_filenames = options.input
@@ -99,12 +100,5 @@ if __name__ == "__main__":
 
     mean_corr = mean_corr.values
     nii_filenames_sorted = [df[df['participant_id'].eq(id)].path.values[0] for (id, _) in mean_corr]
-    pdf_plottings(nii_filenames_sorted, mean_corr, options.output_pdf, limit=10)
-
-
-
-
-
-
-
+    pdf_plottings(nii_filenames_sorted, mean_corr, options.output_pdf, limit=min(options.limit, len(nii_filenames_sorted)))
 
