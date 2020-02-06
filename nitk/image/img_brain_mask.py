@@ -89,7 +89,7 @@ def compute_brain_mask(imgs, target_img=None, mask_thres_mean=0.1, mask_thres_st
     if isinstance(imgs, list) and len(imgs) >= 1 and isinstance(imgs[0], str):
         imgs_arr, df, target_img = img_to_array(imgs)
 
-    elif isinstance(imgs, np.ndarray) and imgs_arr.ndim >= 5:
+    elif isinstance(imgs, np.ndarray) and imgs.ndim >= 5:
         imgs_arr = imgs
         assert isinstance(target_img, nibabel.nifti1.Nifti1Image)
 
