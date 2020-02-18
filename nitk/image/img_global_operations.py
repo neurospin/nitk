@@ -75,7 +75,7 @@ def center_by_site(imgs_arr, site, in_place=False):
            [ 9., 14.],
            [ 3.,  5.],
            [ 4.,  7.]])
-    >>> preproc.center_by_site(imgs_arr, site=[1, 1, 0, 0])
+    >>> center_by_site(imgs_arr, site=[1, 1, 0, 0])
     array([[-0.5, -2. ],
            [ 0.5,  2. ],
            [-0.5, -1. ],

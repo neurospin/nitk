@@ -124,6 +124,13 @@ class Residualizer:
         return self.transform(Y, design_mat)
 
 
+def residualize(Y, data, formula_res, formula_full=None):
+    """Helper function. See Residualizer
+    """
+    res = Residualizer(data=data, formula_res=formula_res, formula_full=formula_full)
+    return res.fit_transform(Y, res.get_design_mat())
+
+
 if __name__ == '__main__':
 
     import numpy as np
