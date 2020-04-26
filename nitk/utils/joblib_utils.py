@@ -9,7 +9,7 @@ Created on Mon Feb 17 23:52:05 2020
 from sklearn.externals.joblib import Parallel, delayed
 
 
-def parallel(func, args_collection, n_jobs=5):
+def parallel(func, args_collection, n_jobs=5, pass_key=False, verbose=10):
     """Parallel execution of function `func` given argument `args_dict` dict
 
     Parameters
@@ -23,6 +23,10 @@ def parallel(func, args_collection, n_jobs=5):
     n_jobs: int
         Number of jobs
 
+    pass_key: bool (default False)
+        If true passes the key (as the first argument) to func. Use it to access
+        to some global structure given the key.
+
     Return
     ------
     Collection of retun values of func. If args_collection is a dict, it
@@ -35,19 +39,29 @@ def parallel(func, args_collection, n_jobs=5):
     >>> args_collection = dict_product({"1":1, "2":2}, {"3":3, "4":4})
     >>> print(args_collection)
     {('1', '3'): [1, 3], ('1', '4'): [1, 4], ('2', '3'): [2, 3], ('2', '4'): [2, 4]}
-    >>> glob_cte = -1
     >>> def add(a, b):
-    ...     return glob_cte * (a + b)
-    >>> parallel(add, args_collection, n_jobs=5)
-    {('1', '3'): -4, ('1', '4'): -5, ('2', '3'): -5, ('2', '4'): -6}
+    ...     return a + b
+    >>> parallel(add, args_collection, n_jobs=5, verbose=0)
+    {('1', '3'): 4, ('1', '4'): 5, ('2', '3'): 5, ('2', '4'): 6}
+    >>> # Use key to access some global structure:
+    >>> glob = {('1', '3'): -1, ('1', '4'): 1, ('2', '3'): -1, ('2', '4'): 1}
+    >>> def add_glob(key, a, b):
+    ...     return glob[key] * (a + b)
+    >>> parallel(add_glob, args_collection, n_jobs=5, pass_key=True, verbose=0)
+    {('1', '3'): -4, ('1', '4'): 5, ('2', '3'): -5, ('2', '4'): 6}
     """
-    if isinstance(args_collection, dict):
-        def call(k, func, *args):
-            return k, func(*args)
 
-        parallel_ = Parallel(n_jobs=n_jobs)
+    parallel_ = Parallel(n_jobs=n_jobs, verbose=verbose)
+
+    if isinstance(args_collection, dict):
+        def call(key, func, *args):
+            if pass_key:
+                return key, func(key, *args)
+            else:
+                return key, func(*args)
+
         cv_ret = parallel_(
-            delayed(call)(k, func, *args) for k, args in args_collection.items())
+            delayed(call)(key, func, *args) for key, args in args_collection.items())
 
         return {k: v for k, v in cv_ret}
 
