@@ -176,8 +176,8 @@ def parallel(func, key_values, n_jobs=5, pass_key=False, verbose=10):
         DESCRIPTION.
 
     """
-    mp = MapReduce(func=func, key_values=key_values, n_jobs=n_jobs, pass_key=pass_key, verbose=verbose)
-    return mp.map()
+    mp = MapReduce(n_jobs=n_jobs, pass_key=pass_key, verbose=verbose)
+    return mp.map(func=func, key_values=key_values)
 
 
 if __name__ == "__main__":
