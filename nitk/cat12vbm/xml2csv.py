@@ -72,8 +72,8 @@ def parse_xml_files(xml_filenames, output_file=None):
                  [roi + '_CSF_Vol' for roi in ROI_names]
 
     if output_file is not None:
-        with open(output_file, 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        with open(output_file, 'w') as tsvfile:
+            writer = csv.DictWriter(tsvfile, fieldnames=fieldnames, dialect="excel-tab")
             writer.writeheader()
             for participant_id in output:
                 for (session, measures) in output[participant_id].items():
@@ -84,7 +84,7 @@ def parse_xml_files(xml_filenames, output_file=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='A list of .xml files', required=True, nargs='+')
-    parser.add_argument('--output', help='Name or path to the output CSV file', default='output_measure.csv')
+    parser.add_argument('--output', help='Name or path to the output TSV file', default='output_measure.tsv')
 
     options = parser.parse_args()
     xml_filenames = options.input
