@@ -7,6 +7,7 @@ Created on Mon Feb 17 23:52:05 2020
 """
 
 import os
+import time
 from filelock import FileLock
 from joblib import Parallel, delayed
 import pickle
@@ -104,7 +105,8 @@ class MapReduce:
         to track execution state.
         Multiple instances of the mapper can be executed on different computer.
         """
-
+        log_instance_filename = os.path.join(self.shared_dir,
+                                             'mapreduce_host-%s_date-%s.log' % (os.uname()[1], time.strftime("%Y%m%d%H%M%S")))
         self.n_tasks = len(key_values)
 
         parallel_ = Parallel(n_jobs=self.n_jobs, verbose=self.verbose)
@@ -113,6 +115,9 @@ class MapReduce:
         def call(key, js, func, *args):
 
             if js.set_state(key=str(key), state="STARTED", previous_state=["INIT"])[1]:
+                if self.verbose >= 10:
+                    with open(log_instance_filename, "a+") as fd:
+                        fd.write('RUN\t%s\t%s\t%s\n' % (key, time.strftime("%Y%m%d-%H%M%S"), os.uname()[1]))
                 ret_ =  func(key, *args) if self.pass_key else func(*args)
                 # ret_["__key__"] = key
                 js.set_state(key=str(key), state="DONE", previous_state=["STARTED"])
