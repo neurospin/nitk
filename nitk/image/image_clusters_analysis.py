@@ -18,8 +18,9 @@ import os, sys, argparse, os.path
 import numpy as np
 import scipy, scipy.ndimage
 import pandas as pd
-from brainomics import array_utils
+from nitk.utils import arr_threshold_from_norm2_ratio
 from numpy import linalg as LA
+import nibabel
 import nilearn
 import nilearn.datasets
 import matplotlib.pylab as plt
@@ -146,7 +147,7 @@ if __name__ == "__main__":
     thresh_pos_high = np.inf
     thresh_norm_ratio = 1.
     vmax = 0.001
-    # MNI152_T1_1mm_brain_filename = "/usr/share/data/fsl-mni152-templates/MNI152_T1_1mm_brain.nii.gz"
+    # MNI152_T1_1mm_brain_filename = "/usr/share/data/fsl-mni152-templates/MNI152_T1_1mm_brain.nii.gz"
 
     atlas =  dict(name="harvard_oxford", sn="HO" , a1="cort", a2="sub") # atlas name, short-name, atlas 1 and 2 names
     #atlas_cort_filename = '/usr/share/data/harvard-oxford-atlases/HarvardOxford/HarvardOxford-cort-maxprob-thr0-1mm.nii.gz'
@@ -176,11 +177,12 @@ if __name__ == "__main__":
     parser.add_argument('--thresh_pos_high',
         help='Positive upper bound threshold (default %f)' % thresh_pos_high, default=thresh_pos_high, type=float)
     parser.add_argument('--atlas',
-        help='Atlas in harvard_oxford (CM cortical and subcortical) JHU for (dti WM and track) (default %s) ' % atlas["name"],
-        default=atlas, type=str)
+        help='Atlas in harvard_oxford or HO (GM cortical and subcortical) JHU for (dti WM and track) (default %s) ' % atlas["name"],
+        default=atlas["name"], type=str)
 
     # To debug: manually set command line
     # argv_ = ['/neurospin/brainomics/2019_rundmc_wmh/analyses/201909_rundmc_wmh_pca/models/pca_enettv_0.000350_1.000_0.001/components-brain-maps_PC0000.nii.gz']
+    # argv_ = "/neurospin/psy_sbox/analyses/202009_start-icaar_cat12vbm_predict-transition/icaar-start_t1mri_mwp1_gs-raw_enettv-0.100:0.010000:1.000000_map.nii.gz".split()
     # options = parser.parse_args(argv_)
 
     options = parser.parse_args()
@@ -195,11 +197,10 @@ if __name__ == "__main__":
 
     ##########################################################################
     # Read volume
-    import nibabel as nib
-    map_img = nib.load(map_filename)
+    map_img = nibabel.load(map_filename)
 
     #trm_ijk_to_mni = ima_get_trm_ijk_to_mni(map_img)
-    map_arr = map_img.get_data()
+    map_arr = map_img.get_fdata()
     if len(map_arr.shape) > 3:
         print("input image is more than 3D split them first using")
         print('fsl5.0-fslsplit %s ./%s -t' % (map_filename, "prefix"))
@@ -215,16 +216,18 @@ if __name__ == "__main__":
     thresh_pos_high = options.thresh_pos_high
 
     # Fetch atlases
-    if options.atlas == "harvard_oxford":
+    if options.atlas in ['harvard_oxford', 'HO']:
         atlas1 = nilearn.datasets.fetch_atlas_harvard_oxford("cort-maxprob-thr0-1mm", data_dir=None, symmetric_split=False, resume=True, verbose=1)
         atlas1_labels = atlas1.labels
         atlas1_filename = atlas1.maps
-        atlas2 = nilearn.datasets.fetch_atlas_harvard_oxford("sub-maxprob-thr0-1mm", data_dir=None, symmetric_split=False, resume=True, verbose=1)
+
+        # FIX bug nilearn.datasets.fetch_atlas_harvard_oxford: Errors in HarvardOxford.tgz / sub-maxprob-thr0-1mm
+        atlas2 = nilearn.datasets.fetch_atlas_harvard_oxford("sub-maxprob-thr0-1mm", data_dir='/usr/share/', symmetric_split=False, resume=True, verbose=1)
         atlas2_labels = atlas2.labels
+        # atlas2.maps = os.path.join('/usr/share/data/harvard-oxford-atlases/HarvardOxford', os.path.basename(atlas2.maps))
         atlas2_filename = atlas2.maps
         atlas = dict(name="harvard_oxford", sn="HO", a1="cort", a2="sub")  # atlas name, short-name, atlas 1 and 2 names
-        # FIX bug nilearn.datasets.fetch_atlas_harvard_oxford: Errors in HarvardOxford.tgz / sub-maxprob-thr0-1mm
-        # atlas2.maps = os.path.join('/usr/share/data/harvard-oxford-atlases/HarvardOxford', os.path.basename(atlas2.maps))
+
     elif options.atlas == 'JHU':
         atlas1_filename = "/usr/share/data/jhu-dti-whitematter-atlas/JHU/JHU-ICBM-labels-1mm.nii.gz"
         atlas2_filename = "/usr/share/data/jhu-dti-whitematter-atlas/JHU/JHU-ICBM-tracts-maxprob-thr0-1mm.nii.gz"
@@ -238,11 +241,11 @@ if __name__ == "__main__":
         atlas = dict(name="JHU", sn="JHU", a1="wm-icbm-dti-81", a2="wm-tracts")  # atlas name, short-name, atlas 1 and 2 names
 
     atlas1_img = nilearn.image.resample_to_img(source_img=atlas1_filename, target_img=map_filename, interpolation='nearest', copy=True, order='F')
-    atlas1_arr  = atlas1_img.get_data().astype(int)
+    atlas1_arr  = atlas1_img.get_fdata().astype(int)
     assert len(np.unique(atlas1_arr)) == len(atlas1_labels), "Atlas %s : array labels must match labels table" %  options.atlas
 
     atlas2_img = nilearn.image.resample_to_img(source_img=atlas2_filename, target_img=map_filename, interpolation='nearest', copy=True, order='F')
-    atlas2_arr = atlas2_img.get_data().astype(int)
+    atlas2_arr = atlas2_img.get_fdata().astype(int)
     assert len(np.unique(atlas2_arr)) == len(atlas2_labels), "Atlas %s : array labels must match labels table" %  options.atlas
 
     assert np.all((map_img.affine == atlas2_img.affine) & (map_img.affine == atlas1_img.affine))
@@ -271,7 +274,7 @@ if __name__ == "__main__":
     # Find clusters (connected component above a given threshold)
     print(thresh_neg_low, thresh_neg_high, thresh_pos_low, thresh_pos_high)
     if thresh_norm_ratio < 1:
-        map_arr, thres = array_utils.arr_threshold_from_norm2_ratio(map_arr, thresh_norm_ratio)
+        map_arr, thres = arr_threshold_from_norm2_ratio(map_arr, thresh_norm_ratio)
         print("Threshold image as %f" % thres)
     clust_bool = np.zeros(map_arr.shape, dtype=bool)
     clust_bool[((map_arr > thresh_neg_low) & (map_arr < thresh_neg_high)) |
@@ -284,11 +287,11 @@ if __name__ == "__main__":
     centers = scipy.ndimage.center_of_mass(clust_bool, map_clustlabels_arr, labels)
 
     # _clusters.nii.gz
-    img = nib.Nifti1Image(map_arr, map_img.get_affine())
+    img = nibabel.Nifti1Image(map_arr, map_img.affine)
     img.to_filename(output_clusters_values_filename)
 
     # _clusters_labels.nii.gz
-    img = nib.Nifti1Image(map_clustlabels_arr, map_img.get_affine())
+    img = nibabel.Nifti1Image(map_clustlabels_arr, map_img.affine)
     img.to_filename(output_clusters_labels_filename)
 
     ##########################################################################
@@ -375,8 +378,3 @@ if __name__ == "__main__":
 
     pdf.close()
 
-"""
-Debug:
-F5
-sys.argv = "image_clusters_analysis_nilearn.py /tmp/weight_map.nii.gz --thresh_norm_ratio 0.99".split()
-"""

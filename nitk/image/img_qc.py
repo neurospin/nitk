@@ -82,16 +82,16 @@ if __name__ == "__main__":
 
     if mask_filenames is None:
         mask_img = compute_brain_mask(imgs_arr, ref_img)
-        mask_arr = mask_img.get_data() > 0
+        mask_arr = mask_img.get_fdata() > 0
         imgs_arr = imgs_arr.squeeze()[:, mask_arr]
     elif len(mask_filenames) == 1:
         mask_img = nibabel.load(mask_filenames[0])
-        mask_arr = mask_img.get_data() > 0
+        mask_arr = mask_img.get_fdata() > 0
         imgs_arr = imgs_arr.squeeze()[:, mask_arr]
     elif len(mask_filenames) > 1:
         assert len(mask_filenames) == len(imgs_arr), "The list of .nii masks must have the same length as the " \
                                                      "list of .nii input files"
-        mask_glob = [nibabel.load(mask_filename).get_data()>0 for mask_filename in mask_filenames]
+        mask_glob = [nibabel.load(mask_filename).get_fdata()>0 for mask_filename in mask_filenames]
         imgs_arr = imgs_arr.squeeze()[mask_glob]
 
     plot_pca(imgs_arr, df)
