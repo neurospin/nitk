@@ -29,7 +29,7 @@ def reduce_cv_classif(key_vals, cv_dict, y_true):
     Parameters
     ----------
     key_vals dict
-        dict of key/val for each run where 
+        dict of key/val for each run where
             key=run_key, val=run_predictions
             - run_key  ::= (<param_0>, ..., <param_p>, <fold>)
             - run_predictions ::= dict(key=pred_key, val=prediction))
@@ -67,10 +67,10 @@ def reduce_cv_classif(key_vals, cv_dict, y_true):
         fold = run_key[-1] # last key match the fold
         train, test = cv_dict[fold]
         # Iterate over predicted values of  given run
-        for pred_key, pred_val in select_predcitions(run_val).items():
+        for pred_key, pred_val in select_predictions(run_val).items():
             #pass
             y_true_ = y_true[test] if pred_key[0] == 'test' else y_true[train]
-            
+
             _, recall, _, count = precision_recall_fscore_support(y_true_, pred_val[0].ravel(), labels=labels,  warn_for='recall')
             bacc = np.mean(recall[count > 0])
             auc = roc_auc_score(y_true_, pred_val[1].ravel()) if len(pred_val) == 2 and is_binary else np.nan
@@ -83,9 +83,9 @@ def reduce_cv_classif(key_vals, cv_dict, y_true):
 
     return pd.DataFrame(res, columns=columns)
 
-def select_predcitions(ret_dict):
+def select_predictions(ret_dict):
     """ Select prediction according to the pattern <y|score>_<train|test>[<_suffix>].
-    And match label with score, ie, 
+    And match label with score, ie,
     Match <y>_<train|test>[<_suffix>] with corresponding <score>_<train|test>[<_suffix>]
 
     Parameters
@@ -99,7 +99,7 @@ def select_predcitions(ret_dict):
     Example
     -------
     >>> ret_dict = dict(y_test=[0, 0], score_test=[.1, .1], y_test_im=[1, 1], score_test_im=[.9, .9])
-    >>> select_predcitions(ret_dict)
+    >>> select_predictions(ret_dict)
     {('test',): [[0, 0], [0.1, 0.1]], ('test', 'im'): [[1, 1], [0.9, 0.9]]}
     """
     ret_keys_ = {tuple(k.split('_')):k for k in ret_dict.keys()}
@@ -132,7 +132,7 @@ def group_by(dict_, grp_keys_idx):
 
     Example
     -------
-    >>> dict_ = {("a", "cv0"): [1, 2], ("a", "cv1"):[3, 4], 
+    >>> dict_ = {("a", "cv0"): [1, 2], ("a", "cv1"):[3, 4],
                 ("b", "cv0"): [10, 20], ("b", "cv0"):[30, 40]}
     >>> group_by(dict_, [0])
     {'a': {'cv0': [1, 2], 'cv1': [3, 4]}, 'b': {'cv0': [30, 40]}}

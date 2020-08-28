@@ -107,7 +107,7 @@ def compute_brain_mask(imgs, target_img=None, mask_thres_mean=0.1, mask_thres_st
     mask_img = nilearn.masking.compute_gray_matter_mask(target_img)
 
     # (3) mask = Implicit mask & brain mask
-    mask_arr = (mask_img.get_data() == 1) & mask_arr
+    mask_arr = (mask_img.get_fdata() == 1) & mask_arr
 
     # (4) Remove small branches
     mask_arr = scipy.ndimage.binary_opening(mask_arr)

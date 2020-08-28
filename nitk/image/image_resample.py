@@ -49,8 +49,8 @@ def down_sample(src_img, factor=2):
 
     >>> resamp_img = brainomics.image_resample.down_sample(src_img=mni159_img, factor=2)
 
-    >>> print("SRC:", mni159_img.header.get_zooms(), mni159_img.get_data().shape)
-    >>> print("DST:", resamp_img.header.get_zooms(), resamp_img.get_data().shape)
+    >>> print("SRC:", mni159_img.header.get_zooms(), mni159_img.get_fdata().shape)
+    >>> print("DST:", resamp_img.header.get_zooms(), resamp_img.get_fdata().shape)
 
     >>> mni159_img.to_filename("/tmp/mni152_%imm.nii.gz" % mni159_img.header.get_zooms()[0])
     >>> resamp_img.to_filename("/tmp/mni152_%imm.nii.gz" % resamp_img.header.get_zooms()[0])
@@ -83,9 +83,9 @@ def aims_resample(src, ref):
     resp.setDefaultValue(0)  # set background to 0
 
     # resample
-    voxel_size = np.array(ref.header()['voxel_size'])    
-    src2ref_trm = get_transformation(src, ref)    
-    output_ima = resp.doit(src2ref_trm, ref.getSizeX(), ref.getSizeY(), ref.getSizeZ(), voxel_size)    
+    voxel_size = np.array(ref.header()['voxel_size'])
+    src2ref_trm = get_transformation(src, ref)
+    output_ima = resp.doit(src2ref_trm, ref.getSizeX(), ref.getSizeY(), ref.getSizeZ(), voxel_size)
     output_ima.header()['referentials'] = ref.header()['referentials']
     output_ima.header()['transformations'] = ref.header()['transformations']
     return output_ima

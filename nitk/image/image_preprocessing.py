@@ -56,14 +56,14 @@ def load_images(NI_filenames, check=dict()):
 
     # Check
     if 'shape' in check:
-        assert ref_img.get_data().shape == check['shape']
+        assert ref_img.get_fdata().shape == check['shape']
     if 'zooms' in check:
         assert ref_img.header.get_zooms() == check['zooms']
     assert np.all([np.all(img.affine == ref_img.affine) for img in NI_imgs])
-    assert np.all([np.all(img.get_data().shape == ref_img.get_data().shape) for img in NI_imgs])
+    assert np.all([np.all(img.get_fdata().shape == ref_img.get_fdata().shape) for img in NI_imgs])
 
-    # Load image subjects x chanels (1) x image
-    NI_arr = np.stack([np.expand_dims(img.get_data(), axis=0) for img in NI_imgs])
+    # Load image subjects x chanels (1) x image
+    NI_arr = np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in NI_imgs])
     return NI_arr, NI_participants_df, ref_img
 
 def merge_ni_df(NI_arr, NI_participants_df, participants_df, participant_id="participant_id"):
@@ -108,7 +108,7 @@ def merge_ni_df(NI_arr, NI_participants_df, participants_df, participant_id="par
     True
     """
     keep = NI_participants_df[participant_id].isin(participants_df[participant_id])
-    return NI_arr[keep], pd.merge(NI_participants_df[keep], participants_df, on=participant_id, how= 'inner') # preserve the order of the left keys.
+    return NI_arr[keep], pd.merge(NI_participants_df[keep], participants_df, on=participant_id, how= 'inner') # preserve the order of the left keys.
 
 def global_scaling(NI_arr, axis0_values=None, target=1500):
     """
@@ -223,7 +223,7 @@ def compute_brain_mask(NI_arr, target_img, mask_thres_mean=0.1, mask_thres_std=1
     mask_img = nilearn.masking.compute_gray_matter_mask(target_img)
 
     # (3) mask = Implicit mask & brain mask
-    mask_arr = (mask_img.get_data() == 1) & mask_arr
+    mask_arr = (mask_img.get_fdata() == 1) & mask_arr
 
     # (4) Remove small branches
     mask_arr = scipy.ndimage.binary_opening(mask_arr)

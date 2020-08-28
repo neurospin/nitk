@@ -7,6 +7,7 @@ Created on Mon Feb 17 23:52:05 2020
 """
 
 import os
+import time
 from filelock import FileLock
 from joblib import Parallel, delayed
 import pickle
@@ -22,8 +23,9 @@ class MapReduce:
     n_jobs: int
         Number of jobs
 
-    sync_dir str
-
+    shared_dir str (optional) for map_distributed only
+        A shared directory to store map outputs, log and lock files used to
+        synchonize jobs.
 
     pass_key: bool (default False)
         If true passes the key (as the first argument) to func. Use it to access
@@ -35,34 +37,31 @@ class MapReduce:
     Example
     -------
 
-    >>> from nitk.utils import dict_product, parallel
+    >>> from nitk.mapreduce import dict_product, MapReduce, parallel
     >>> # Prepare collection of arguments
     >>> key_values = dict_product({"1":1, "2":2}, {"3":3, "4":4})
     >>> print(key_values)
     {('1', '3'): [1, 3], ('1', '4'): [1, 4], ('2', '3'): [2, 3], ('2', '4'): [2, 4]}
     >>> def add(a, b):
     ...     return a + b
+    >>> MapReduce(n_jobs=5, verbose=0).map(add, key_values)
+    {('1', '3'): 4, ('1', '4'): 5, ('2', '3'): 5, ('2', '4'): 6}
+    >>> # Use helper function
     >>> parallel(add, key_values, n_jobs=5, verbose=0)
     {('1', '3'): 4, ('1', '4'): 5, ('2', '3'): 5, ('2', '4'): 6}
-    >>> # Use key to access some global structure:
-    >>> glob = {('1', '3'): -1, ('1', '4'): 1, ('2', '3'): -1, ('2', '4'): 1}
-    >>> def add_glob(key, a, b):
-    ...     return glob[key] * (a + b)
-    >>> parallel(add_glob, key_values, n_jobs=5, pass_key=True, verbose=0)
-    {('1', '3'): -4, ('1', '4'): 5, ('2', '3'): -5, ('2', '4'): 6}
     """
 
-    def __init__(self, n_jobs=5, sync_dir=None, pass_key=False, verbose=10):
+    def __init__(self, n_jobs=5, shared_dir=None, pass_key=False, verbose=10):
 
         self.n_jobs = n_jobs
-        self.sync_dir = sync_dir
+        self.shared_dir = shared_dir
         self.pass_key = pass_key
         self.verbose = verbose
 
 
     def map(self, func, key_values):
 
-        return self.map_centralized(func, key_values) if self.sync_dir is None \
+        return self.map_centralized(func, key_values) if self.shared_dir is None \
             else self.map_distributed(func, key_values)
 
     def map_centralized(self, func, key_values):
@@ -102,19 +101,23 @@ class MapReduce:
             return cv_ret
 
     def map_distributed(self, func, key_values):
-        """ Distributed execution of parallel based on filesystem synchronisation
+        """ Distributed execution of map based on filesystem synchronisation
         to track execution state.
-        Multiple instances of "parallel" can be executed on different computer.
+        Multiple instances of the mapper can be executed on different computer.
         """
-
+        log_instance_filename = os.path.join(self.shared_dir,
+                                             'mapreduce_host-%s_date-%s.log' % (os.uname()[1], time.strftime("%Y%m%d%H%M%S")))
         self.n_tasks = len(key_values)
 
         parallel_ = Parallel(n_jobs=self.n_jobs, verbose=self.verbose)
-        js = JobSynchronizer(self.sync_dir)
+        js = JobSynchronizer(self.shared_dir)
 
         def call(key, js, func, *args):
 
             if js.set_state(key=str(key), state="STARTED", previous_state=["INIT"])[1]:
+                if self.verbose >= 10:
+                    with open(log_instance_filename, "a+") as fd:
+                        fd.write('RUN\t%s\t%s\t%s\n' % (key, time.strftime("%Y%m%d-%H%M%S"), os.uname()[1]))
                 ret_ =  func(key, *args) if self.pass_key else func(*args)
                 # ret_["__key__"] = key
                 js.set_state(key=str(key), state="DONE", previous_state=["STARTED"])
@@ -133,21 +136,39 @@ class MapReduce:
 
         return {k: v for k, v in cv_ret if v is not None}
 
-    def reduce_load_results(self):
+    def reduce_collect_outputs(self):
+        """Collect output key/value pairs produced by `map_distributed()` into
+        a single dict. Return None if some expected pair were not available.
+        Each discrtibuted instance of the mapper can safely call
+        `reduce_collect_outputs()` only the last to finish will return the
+        dictionary.
 
-        re_key = re.compile('task_([^\.pkl]*)')
-        res = dict()
-        map_ouptut_filenames = glob.glob(os.path.join(self.sync_dir, "task_*.pkl"))
+        Returns
+        -------
+        res : dict or None
+            Return output key/value pairs or None if some are missing.
 
-        if len(map_ouptut_filenames) == self.n_tasks:
+        """
 
-            for f in map_ouptut_filenames:
-                key_ = eval(re_key.findall(f)[0])
-                with open(f, 'rb') as fd:
-                    res_ = pickle.load(fd)
-                res[key_] = res_
+        re_key = re.compile('^task_([^$]*)')
+        # Fetch [key, filename] pairs in task_*.pkl"
+        key_filenames_output = [[re_key.findall(os.path.splitext(os.path.basename(f))[0]),
+                                 f] for f in glob.glob(os.path.join(self.shared_dir, "task_*.pkl"))]
+        # Keep exactly those with one key
+        key_filenames_output = [[pair[0][0], pair[1]] for pair in
+                                key_filenames_output if len(pair[0]) == 1]
 
-            return res
+        key_values_output = dict()
+        if len(key_filenames_output) == self.n_tasks:
+
+            for key_str, value_filename in key_filenames_output:
+                pass
+                key = eval(key_str)
+                with open(value_filename, 'rb') as fd:
+                    value = pickle.load(fd)
+                key_values_output[key] = value
+
+            return key_values_output
 
         else:
 
@@ -208,13 +229,13 @@ if __name__ == "__main__":
     import os
     import shutil
 
-    sync_dir = os.path.join(tempfile.gettempdir(), "mapreduce_add")
-    shutil.rmtree(sync_dir)
-    os.makedirs(sync_dir)
-    print("sync_dir:", sync_dir)
+    shared_dir = os.path.join(tempfile.gettempdir(), "mapreduce_add")
+    shutil.rmtree(shared_dir)
+    os.makedirs(shared_dir)
+    print("shared_dir:", shared_dir)
 
     print("## Run mapper ##")
-    mp = MapReduce(n_jobs=5, sync_dir=sync_dir, verbose=20)
+    mp = MapReduce(n_jobs=5, shared_dir=shared_dir, verbose=20)
     mp.map(add, key_values)
 
     print("## Run reducer ##")

@@ -42,7 +42,7 @@ def plot_univ_stats(univstats, mask_img, data=None, grand_mean=None, pdf_filenam
     Parameters
     ----------
     univstats: dict(indendant_variable:[[fstats], [pvalues]], ...)
-    mask_img: mask image, such that sum(mask_img.get_data() > 0) == stat[iv][0].shape[0]
+    mask_img: mask image, such that sum(mask_img.get_fdata() > 0) == stat[iv][0].shape[0]
     data: DataFrame (n_variables, n_subjects) used to build the design matrix. Variables are ploted against grand mean
     grand_mean: array (n_subjects, ) subject grand mean
     pdf_filename: str,
@@ -60,7 +60,7 @@ def plot_univ_stats(univstats, mask_img, data=None, grand_mean=None, pdf_filenam
         univstats = univstats.copy()
         univstats.pop("Intercept")
 
-    mask_arr = mask_img.get_data() > 0
+    mask_arr = mask_img.get_fdata() > 0
     ####################################################################################################################
     # Plots
 
@@ -85,7 +85,7 @@ def plot_univ_stats(univstats, mask_img, data=None, grand_mean=None, pdf_filenam
     fig, ax = plt.subplots(nrows=len(univstats), ncols=1, figsize=(8.27, 11.69))
     fig.suptitle(fig_title)
     for cpt, var in enumerate(univstats):
-        # print(cpt, var)
+        # print(cpt, var)
         # ax_title = "%s: histo p-value (y~%s)" % (var, "+".join(design_mat.columns))
         ax_title = "%s: histo p-value" % var
         ax[cpt].hist(univstats[var][1], bins=100)
@@ -265,7 +265,7 @@ def ml_predictions(X, y, estimators, cv=None, mask_arr=None):
             except:
                 if 'coefs' in preds[name]: preds[name].pop('coefs')
 
-    # Compute statistics
+    # Compute statistics
     #stats = {name:dict() for name in estimators}
     stats_list = list()
     stats_folds_list = list()

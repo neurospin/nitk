@@ -57,7 +57,7 @@ class JobSynchronizer:
         return log_filename, lock_filename
 
     def set_state(self, key, state, previous_state=[]):
-        """ First `start(key="0")` returns 'OK'
+        """Set state of job identified by key.
         Next call to to `start(key="0")` will returns the current job state: 'STARTED'
         or 'DONE'.
 
@@ -94,7 +94,7 @@ class JobSynchronizer:
             # Set state if transition allowed by previous_state
             if len(previous_state) == 0 or previous_state_ in previous_state:
                 with open(log_filename, "w") as fd:
-                    fd.write('%s % s' % (state, time.strftime("%Y-%m-%d-%H-%M-%S")))
+                    fd.write('%s %s %s' % (state, time.strftime("%Y-%m-%d-%H-%M-%S"), os.uname()[1]))
                 return previous_state_, True
             else:
                 return previous_state_, False

@@ -72,16 +72,16 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
 
     # Check expected dimension
     if 'shape' in expected:
-        assert ref_img.get_data().shape == expected['shape']
+        assert ref_img.get_fdata().shape == expected['shape']
     if 'zooms' in expected:
         assert ref_img.header.get_zooms() == expected['zooms']
 
     if check_same_referential: # Check all images have the same transformation
         assert np.all([np.all(img.affine == ref_img.affine) for img in imgs_nii])
-        assert np.all([np.all(img.get_data().shape == ref_img.get_data().shape) for img in imgs_nii])
+        assert np.all([np.all(img.get_fdata().shape == ref_img.get_fdata().shape) for img in imgs_nii])
 
     # Load image subjects x channels (1) x image
-    imgs_arr = np.stack([np.expand_dims(img.get_data(), axis=0) for img in imgs_nii])
+    imgs_arr = np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in imgs_nii])
 
     return imgs_arr, df, ref_img
 
