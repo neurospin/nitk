@@ -1,0 +1,23 @@
+"label","name","lobe"
+0,"Background",
+1,"Left Cerebral White Matter",
+2,"Left Cerebral Cortex ",
+3,"Left Lateral Ventrical",
+4,"Left Thalamus","Limbic"
+5,"Left Caudate","Limbic"
+6,"Left Putamen","Limbic"
+7,"Left Pallidum","Limbic"
+8,"Brain-Stem","Brain-Stem"
+9,"Left Hippocampus","Limbic"
+10,"Left Amygdala","Limbic"
+11,"Left Accumbens","Limbic"
+12,"Right Cerebral White Matter",
+13,"Right Cerebral Cortex ",
+14,"Right Lateral Ventricle","Limbic"
+15,"Right Thalamus","Limbic"
+16,"Right Caudate","Limbic"
+17,"Right Putamen","Limbic"
+18,"Right Pallidum","Limbic"
+19,"Right Hippocampus","Limbic"
+20,"Right Amygdala","Limbic"
+21,"Right Accumbens",

@@ -179,10 +179,13 @@ if __name__ == "__main__":
     parser.add_argument('--atlas',
         help='Atlas in harvard_oxford or HO (GM cortical and subcortical) JHU for (dti WM and track) (default %s) ' % atlas["name"],
         default=atlas["name"], type=str)
+    parser.add_argument("--save_atlas", action='store_true',
+                         help='Save atlases nii files and labels csv files')
 
     # To debug: manually set command line
     # argv_ = ['/neurospin/brainomics/2019_rundmc_wmh/analyses/201909_rundmc_wmh_pca/models/pca_enettv_0.000350_1.000_0.001/components-brain-maps_PC0000.nii.gz']
-    # argv_ = "/neurospin/psy_sbox/analyses/202009_start-icaar_cat12vbm_predict-transition/icaar-start_t1mri_mwp1_gs-raw_enettv-0.100:0.010000:1.000000_map.nii.gz".split()
+    # argv_ = "/neurospin/psy_sbox/analyses/202008_start-icaar_cat12vbm_predict-transition/icaar-start_t1mri_mwp1_gs-raw_enettv_0.100:0.010000:1.000000_coefmap.nii.gz --save_atlas".split()
+    # argv_ = "/neurospin/psy_sbox/analyses/202008_start-icaar_cat12vbm_predict-transition/icaar-start_t1mri_mwp1_gs-raw_enettv_0.100:0.010000:1.000000_coefmap.nii.gz".split()
     # options = parser.parse_args(argv_)
 
     options = parser.parse_args()
@@ -206,7 +209,6 @@ if __name__ == "__main__":
         print('fsl5.0-fslsplit %s ./%s -t' % (map_filename, "prefix"))
         sys.exit(0)
 
-    map_filename = options.input
     thresh_size = options.thresh_size
     thresh_norm_ratio = options.thresh_norm_ratio
     vmax = options.vmax
@@ -249,11 +251,16 @@ if __name__ == "__main__":
     assert len(np.unique(atlas2_arr)) == len(atlas2_labels), "Atlas %s : array labels must match labels table" %  options.atlas
 
     assert np.all((map_img.affine == atlas2_img.affine) & (map_img.affine == atlas1_img.affine))
+
+
     ##########################################################################
-    map_basename, ext = os.path.splitext(map_filename)
-    if ext == ".gz":
-        map_basename, _ = os.path.splitext(map_basename)
-    map_basename = os.path.basename(map_basename)
+    def rm_niftii_extension(filename):
+        filename, ext = os.path.splitext(filename)
+        if ext == ".gz":
+            filename, _ = os.path.splitext(filename)
+        return filename
+
+    map_basename = os.path.basename(rm_niftii_extension(map_filename))
 
     output = os.getcwd()
     if options.output:
@@ -264,10 +271,20 @@ if __name__ == "__main__":
             pass
     output = os.path.join(output, map_basename)
 
+    if options.save_atlas:
+        output_atlas1_filename  = output + "_atlas-" + os.path.basename(rm_niftii_extension(atlas1_filename))
+        output_atlas2_filename  = output + "_atlas-" + os.path.basename(rm_niftii_extension(atlas2_filename))
+
+        atlas1_img.to_filename(output_atlas1_filename + ".nii.gz")
+        atlas2_img.to_filename(output_atlas2_filename + ".nii.gz")
+        pd.DataFrame(dict(label=np.arange(len(atlas1_labels)), name=atlas1_labels)).to_csv(output_atlas1_filename + ".csv", index=False)
+        pd.DataFrame(dict(label=np.arange(len(atlas2_labels)), name=atlas2_labels)).to_csv(output_atlas2_filename + ".csv", index=False)
+
     output_figure_filename  = output + "_clust_info.pdf"
     output_csv_clusters_info_filename  = output + "_clust_info.csv"
     output_clusters_labels_filename  = output + "_clust_labels.nii.gz"
     output_clusters_values_filename  = output + "_clust_values.nii.gz"
+
 
     print("Outputs:", output, output_figure_filename)
     ##########################################################################

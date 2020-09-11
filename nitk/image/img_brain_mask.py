@@ -23,6 +23,19 @@ import nilearn
 import nilearn.masking
 
 
+def rm_small_clusters(mask_arr, clust_size_thres=10):
+    """Remove clusters smaller than clust_size_thres
+    """
+    mask_clustlabels_arr, n_clusts = scipy.ndimage.label(mask_arr)
+
+    labels = np.unique(mask_clustlabels_arr)[1:]
+    for lab in labels:
+        clust_size = np.sum(mask_clustlabels_arr == lab)
+        if clust_size <= clust_size_thres:
+            mask_arr[mask_clustlabels_arr == lab] = False
+
+    return mask_arr
+
 def compute_brain_mask(imgs, target_img=None, mask_thres_mean=0.1, mask_thres_std=1e-6, clust_size_thres=10, verbose=1):
     """
     Compute brain mask:
@@ -113,13 +126,7 @@ def compute_brain_mask(imgs, target_img=None, mask_thres_mean=0.1, mask_thres_st
     mask_arr = scipy.ndimage.binary_opening(mask_arr)
 
     # (5) Avoid isolated clusters: remove all cluster smaller that clust_size_thres
-    mask_clustlabels_arr, n_clusts = scipy.ndimage.label(mask_arr)
-
-    labels = np.unique(mask_clustlabels_arr)[1:]
-    for lab in labels:
-        clust_size = np.sum(mask_clustlabels_arr == lab)
-        if clust_size <= clust_size_thres:
-            mask_arr[mask_clustlabels_arr == lab] = False
+    mask_arr = rm_small_clusters(mask_arr, clust_size_thres=clust_size_thres)
 
     if verbose >= 1:
         mask_clustlabels_arr, n_clusts = scipy.ndimage.label(mask_arr)

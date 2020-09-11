@@ -7,10 +7,10 @@ Created on Wed Feb  5 11:12:53 2020
 """
 
 from .img_to_array import img_to_array
-from .img_brain_mask import compute_brain_mask
+from .img_brain_mask import compute_brain_mask, rm_small_clusters
 from .img_global_operations import global_scaling, center_by_site
 
 __all__ = ['img_to_array',
-           'compute_brain_mask',
+           'compute_brain_mask', 'rm_small_clusters'
            'global_scaling',
            'center_by_site']

@@ -136,7 +136,7 @@ class MapReduce:
 
         return {k: v for k, v in cv_ret if v is not None}
 
-    def reduce_collect_outputs(self):
+    def reduce_collect_outputs(self, force=False):
         """Collect output key/value pairs produced by `map_distributed()` into
         a single dict. Return None if some expected pair were not available.
         Each discrtibuted instance of the mapper can safely call
@@ -159,7 +159,7 @@ class MapReduce:
                                 key_filenames_output if len(pair[0]) == 1]
 
         key_values_output = dict()
-        if len(key_filenames_output) == self.n_tasks:
+        if len(key_filenames_output) == self.n_tasks or force:
 
             for key_str, value_filename in key_filenames_output:
                 pass
