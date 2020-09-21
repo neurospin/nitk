@@ -7,7 +7,7 @@ Created on Mon Feb 17 23:53:32 2020
 """
 
 from .array_utils import arr_get_threshold_from_norm2_ratio, arr_threshold_from_norm2_ratio,\
-    maps_similarity
+    maps_similarity, arr_clusters
 
 __all__ = ['arr_get_threshold_from_norm2_ratio', 'arr_threshold_from_norm2_ratio',
-           'maps_similarity']
+           'maps_similarity', 'arr_clusters']

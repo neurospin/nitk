@@ -14,6 +14,8 @@ import pickle
 import re
 import glob
 from .job_synchronizer import JobSynchronizer
+import zipfile
+
 
 class MapReduce:
     """
@@ -58,6 +60,10 @@ class MapReduce:
         self.pass_key = pass_key
         self.verbose = verbose
 
+        # shared_dir doesn't exist but exists as a zip file: uncompress
+        if not os.path.isdir(self.shared_dir) and zipfile.is_zipfile(self.shared_dir+".zip"):
+            with zipfile.ZipFile(shared_dir+".zip", 'r') as zip_ref:
+                zip_ref.extractall(os.path.dirname(shared_dir))
 
     def map(self, func, key_values):
 
@@ -159,7 +165,7 @@ class MapReduce:
                                 key_filenames_output if len(pair[0]) == 1]
 
         key_values_output = dict()
-        if len(key_filenames_output) == self.n_tasks or force:
+        if force or len(key_filenames_output) == self.n_tasks:
 
             for key_str, value_filename in key_filenames_output:
                 pass

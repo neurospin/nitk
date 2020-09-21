@@ -6,6 +6,7 @@ Created on Sun Sep 28 17:39:34 2014
 """
 
 import numpy as np
+import scipy.ndimage
 
 def arr_get_threshold_from_norm2_ratio(v, ratio=.99):
     """Get threshold to apply to a 1d array such
@@ -58,6 +59,70 @@ def arr_threshold_from_norm2_ratio(v, ratio=.99):
     v_t = v.copy()
     v_t[np.abs(v) < t] = 0
     return v_t, t
+
+def arr_clusters(arr, mask_arr=None, rm_clust_smaller_than=None):
+    """Cluster analysis of thresholded map. Provides the number of clusters
+    their sizes.
+
+    Parameters
+    ----------
+
+    arr: (1D or ND numpy array)
+        The (thresholded) coefs (1D) vector (mask_arr should be provided).
+        Or (ND numpy array) of coef map.
+
+    mask_arr: (ND numpy array) ND mask array if coefs_t is 1D.
+
+    rm_clust_smaller_than: int, remove cluster smaller than the given value
+
+    Return
+    ------
+    clustlabels_arr, n_clusts, clust_sizes
+
+    Example
+    -------
+
+    >>> import numpy as np
+    >>> from nitk.utils import arr_threshold_from_norm2_ratio
+    >>> from nitk.utils import arr_clusters
+    >>> np.random.seed(1)
+    >>> coefs_map = np.random.randn(5, 5)
+    >>> coefs_map_t, t = arr_threshold_from_norm2_ratio(coefs_map, ratio=.9)
+    >>> print(coefs_map_t)
+    [[ 1.62434536  0.          0.          0.          0.        ]
+     [-2.3015387   1.74481176  0.          0.          0.        ]
+     [ 1.46210794 -2.06014071  0.          0.          1.13376944]
+     [-1.09989127  0.          0.          0.          0.        ]
+     [-1.10061918  1.14472371  0.          0.          0.        ]]
+    >>> labels_arr, n_clusts, clust_sizes = arr_clusters(coefs_map_t)
+    >>> print(labels_arr, n_clusts, clust_sizes )
+    [[1 0 0 0 0]
+     [1 1 0 0 0]
+     [1 1 0 0 2]
+     [1 0 0 0 0]
+     [1 1 0 0 0]] 2 [8, 1]
+    # 2 clusters of sizes 8 and 1
+        """
+    if mask_arr is not None:
+        coefs_arr = np.zeros(mask_arr.shape)
+        coefs_arr[mask_arr] = arr
+    else:
+        coefs_arr = arr
+
+    clustlabels_arr, n_clusts = scipy.ndimage.label(np.abs(coefs_arr) > 0)
+
+    if rm_clust_smaller_than:
+        for lab in np.unique(clustlabels_arr)[1:]:
+            clust_size = np.sum(clustlabels_arr == lab)
+            if clust_size <= rm_clust_smaller_than:
+                clustlabels_arr[clustlabels_arr == lab] = 0
+
+        n_clusts = len(np.unique(clustlabels_arr)) - 1
+
+    clust_sizes = [np.sum(clustlabels_arr == lab) for lab in np.unique(clustlabels_arr)[1:]]
+
+    return clustlabels_arr, n_clusts, clust_sizes
+
 
 def maps_similarity(maps):
     """Map's measures of similarity
