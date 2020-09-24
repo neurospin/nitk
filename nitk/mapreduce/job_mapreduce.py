@@ -41,16 +41,16 @@ class MapReduce:
 
     >>> from nitk.mapreduce import dict_product, MapReduce, parallel
     >>> # Prepare collection of arguments
-    >>> key_values = dict_product({"1":1, "2":2}, {"3":3, "4":4})
+    >>> key_values = dict_product({"1":1, "2":2}, {"3":3, "4":4}, {"1":1})
     >>> print(key_values)
-    {('1', '3'): [1, 3], ('1', '4'): [1, 4], ('2', '3'): [2, 3], ('2', '4'): [2, 4]}
-    >>> def add(a, b):
-    ...     return a + b
+    {('1', '3', '1'): [1, 3, 1], ('1', '4', '1'): [1, 4, 1], ('2', '3', '1'): [2, 3, 1], ('2', '4', '1'): [2, 4, 1]}
+    >>> def add(a, b, cte):
+    ...     return a + b + cte
     >>> MapReduce(n_jobs=5, verbose=0).map(add, key_values)
-    {('1', '3'): 4, ('1', '4'): 5, ('2', '3'): 5, ('2', '4'): 6}
+    {('1', '3', '1'): 5, ('1', '4', '1'): 6, ('2', '3', '1'): 6, ('2', '4', '1'): 7}
     >>> # Use helper function
     >>> parallel(add, key_values, n_jobs=5, verbose=0)
-    {('1', '3'): 4, ('1', '4'): 5, ('2', '3'): 5, ('2', '4'): 6}
+    {('1', '3', '1'): 5, ('1', '4', '1'): 6, ('2', '3', '1'): 6, ('2', '4', '1'): 7}
     """
 
     def __init__(self, n_jobs=5, shared_dir=None, pass_key=False, verbose=10):
@@ -61,7 +61,8 @@ class MapReduce:
         self.verbose = verbose
 
         # shared_dir doesn't exist but exists as a zip file: uncompress
-        if not os.path.isdir(self.shared_dir) and zipfile.is_zipfile(self.shared_dir+".zip"):
+        if self.shared_dir is not None and \
+            (not os.path.isdir(self.shared_dir) and zipfile.is_zipfile(self.shared_dir+".zip")):
             with zipfile.ZipFile(shared_dir+".zip", 'r') as zip_ref:
                 zip_ref.extractall(os.path.dirname(shared_dir))
 

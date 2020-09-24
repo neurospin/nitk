@@ -23,7 +23,7 @@ def dict_product(*dicts):
 
 
 
-def reduce_cv_classif(key_vals, cv_dict, y_true):
+def reduce_cv_classif(key_vals, cv_dict, y_true, index_fold=-1):
     """ Reduce function take runs key/val and CV metrics for classification
 
     Parameters
@@ -64,22 +64,32 @@ def reduce_cv_classif(key_vals, cv_dict, y_true):
     res = list()
     # Iterate over run
     for run_key, run_val in key_vals.items():
-        fold = run_key[-1] # last key match the fold
+        # DEBUG break
+        fold = run_key[index_fold] # last key match the fold
         train, test = cv_dict[fold]
         # Iterate over predicted values of  given run
         for pred_key, pred_val in select_predictions(run_val).items():
-            #pass
+            # DEBUG pred_key, pred_val = list(select_predictions(run_val).items())[1]
             y_true_ = y_true[test] if pred_key[0] == 'test' else y_true[train]
-
             _, recall, _, count = precision_recall_fscore_support(y_true_, pred_val[0].ravel(), labels=labels,  warn_for='recall')
             bacc = np.mean(recall[count > 0])
             auc = roc_auc_score(y_true_, pred_val[1].ravel()) if len(pred_val) == 2 and is_binary else np.nan
             res.append(
                 list(run_key) + ["_".join(pred_key)] + [auc, bacc] + recall.tolist() + count.tolist())
 
-    columns =  ["param_%i" % p for p in range(len(run_key) - 1)] + ["fold"] + ["pred"] +\
+    # columns =  ["param_%i" % p for p in range(len(run_key) - 1)] + ["fold"] + ["pred"] +\
+    #        ["auc", "bacc"] + ["recall_%i" % lab for lab in labels] + \
+    #       ["count_%i" % lab for lab in labels]
+
+
+    columns =  ["param_%i" % p for p in range(len(run_key))] + ["pred"] +\
             ["auc", "bacc"] + ["recall_%i" % lab for lab in labels] + \
             ["count_%i" % lab for lab in labels]
+
+    if index_fold == -1:
+        columns[len(run_key)-1] = "fold"
+    else:
+        columns[index_fold] = "fold"
 
     return pd.DataFrame(res, columns=columns)
 
