@@ -62,9 +62,10 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
     4       ICAAR048      V1  /neurospin/psy/start-icaar-eugei/derivatives/c...
 
     """
-
-    df = pd.DataFrame([pd.Series(get_keys(filename)) for filename in img_filenames])
-
+    try:
+        df = pd.DataFrame([pd.Series(get_keys(filename)) for filename in img_filenames])
+    except:
+        df = pd.DataFrame(dict(path=img_filenames))
 
     imgs_nii = [nibabel.load(filename) for filename in df.path]
 
