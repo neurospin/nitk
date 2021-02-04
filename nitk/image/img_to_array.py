@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import nibabel
 import argparse
-from  nitk.bids import get_keys
+from nitk.bids import get_keys
 
 def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
     """
