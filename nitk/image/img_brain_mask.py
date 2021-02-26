@@ -23,7 +23,6 @@ from nilearn.image import resample_to_img
 
 from  nitk.bids import get_keys
 from  nitk.image import img_to_array
-from  nitk.atlases import fetch_atlas_lobes
 
 
 def rm_small_clusters(mask_arr, clust_size_thres=None):
@@ -164,6 +163,7 @@ def compute_brain_mask(target_img=None, imgs=None, implicitmask_arr=None,
     >>> np.all(mask_img2.get_fdata() == mask_img.get_fdata())
     True
     """
+    from nitk.atlases import fetch_atlas_lobes
 
     if target_img is None:
         raise ValueError("target_img is missing")
