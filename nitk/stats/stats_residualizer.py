@@ -171,3 +171,57 @@ if __name__ == '__main__':
     sns.lmplot("age", "y", hue="site", data=data)
     sns.lmplot("age", "yres", hue="site", data=data)
     sns.lmplot("age", "yadj", hue="site", data=data)
+
+    # Usage combined with cross-validation
+    # Predict age from many ys
+    X = np.random.randn(100, 5)
+    X[:, 0] = -0.1 * age + site + np.random.normal(size=100)
+    X[:, 1] = -0.1 * age + site + np.random.normal(size=100)
+    demographic_df = pd.DataFrame(dict(age=age, site=site.astype(object)))
+    y = age
+
+    # X: input data of the predictive model are the
+    # Predictive model
+    from sklearn import linear_model
+    from sklearn.model_selection import StratifiedKFold
+    from sklearn import metrics
+
+    lr = linear_model.Ridge(alpha=1)
+    cv = StratifiedKFold(n_splits=5, random_state=42)
+
+    # Residializers
+    formula_res = 'site'
+    formula_full = 'site + age'
+    residualizer = Residualizer(data=demographic_df, formula_res=formula_res, formula_full=formula_full)
+
+    Z = residualizer.get_design_mat()
+    scores = np.zeros((5, 2))
+
+    for i, (tr_idx, te_idx) in enumerate(cv.split(X, site)):
+        X_tr, X_te = X[tr_idx, :], X[te_idx, :]
+        Z_tr, Z_te = Z[tr_idx, :], Z[te_idx, :]
+        y_tr, y_te = y[tr_idx], y[te_idx]
+
+        # 1) Fit residualizer
+        residualizer.fit(X_tr, Z_tr)
+
+        # 2) Residualize
+        X_res_tr = residualizer.transform(X_tr, Z_tr)
+        X_res_te = residualizer.transform(X_te, Z_te)
+
+        # 3) Fit predictor on train residualized data
+        lr.fit(X_res_tr, y_tr)
+
+        # 4) Predict on test residualized data
+        y_test_pred = lr.predict(X_res_te)
+
+        # 5) Compute metrics
+        scores[i, 0] = metrics.r2_score(y_te, y_test_pred)
+        scores[i, 1] = metrics.mean_absolute_error(y_te, y_test_pred)
+
+    scores = pd.DataFrame(scores, columns=['r2', 'mae'])
+
+    print("Mean scores")
+    print(scores.mean(axis=0))
+    print("Standard Errors")
+    print(scores.std(axis=0) / np.sqrt(5))
