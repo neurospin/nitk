@@ -15,6 +15,7 @@ import re
 import glob
 from .job_synchronizer import JobSynchronizer
 import zipfile
+from shutil import copyfile, make_archive, unpack_archive, move
 
 
 class MapReduce:
@@ -150,12 +151,23 @@ class MapReduce:
         `reduce_collect_outputs()` only the last to finish will return the
         dictionary.
 
+        Parameters
+        ----------
+
+        force: boolean
+            Forces the recovery of outputs by disabling the verification that
+            all tasks have completed their execution. Use it off-line when
+            you are sure that all tasks have completed their execution.
+
         Returns
         -------
         res : dict or None
             Return output key/value pairs or None if some are missing.
 
         """
+        # Unzip archive is needed
+        if not os.path.exists(self.shared_dir) and os.path.exists(self.shared_dir + ".zip"):
+            unpack_archive(self.shared_dir + ".zip", extract_dir=os.path.dirname(self.shared_dir))
 
         re_key = re.compile('^task_([^$]*)')
         # Fetch [key, filename] pairs in task_*.pkl"
@@ -180,6 +192,12 @@ class MapReduce:
         else:
 
             return None
+
+    def make_archive(self):
+        make_archive(self.shared_dir, "zip",
+                     root_dir=os.path.dirname(self.shared_dir),
+                     base_dir=os.path.basename(self.shared_dir))
+        print("%s can be safely deleted" % self.shared_dir)
 
 
 def parallel(func, key_values, n_jobs=5, pass_key=False, verbose=10):

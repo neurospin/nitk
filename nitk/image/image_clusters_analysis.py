@@ -146,7 +146,7 @@ if __name__ == "__main__":
     thresh_pos_low = 0
     thresh_pos_high = np.inf
     thresh_norm_ratio = 1.
-    vmax = 0.001
+
     # MNI152_T1_1mm_brain_filename = "/usr/share/data/fsl-mni152-templates/MNI152_T1_1mm_brain.nii.gz"
 
     atlas =  dict(name="harvard_oxford", sn="HO" , a1="cort", a2="sub") # atlas name, short-name, atlas 1 and 2 names
@@ -166,8 +166,7 @@ if __name__ == "__main__":
         help='Threshold image such ||v[|v| >= t]||2 / ||v||2 == thresh_norm_ratio (default %f)'% thresh_norm_ratio,
         default=thresh_norm_ratio, type=float)
     parser.add_argument('--vmax',
-        help='Upper bound for plotting, passed to matplotlib.pyplot.imshow (default %f)'% vmax,
-        default=vmax, type=float)
+        help='Upper bound for plotting, passed to matplotlib.pyplot.imshow', type=float)
     parser.add_argument('--thresh_neg_low',
         help='Negative lower bound threshold (default %f)' % thresh_neg_low, default=thresh_neg_low, type=float)
     parser.add_argument('--thresh_neg_high',
@@ -211,7 +210,12 @@ if __name__ == "__main__":
 
     thresh_size = options.thresh_size
     thresh_norm_ratio = options.thresh_norm_ratio
-    vmax = options.vmax
+
+    if options.vmax is None:
+        vmax = np.max(np.abs(map_arr))
+    else:
+        vmax = options.vmax
+
     thresh_neg_low = options.thresh_neg_low
     thresh_neg_high = options.thresh_neg_high
     thresh_pos_low = options.thresh_pos_low
@@ -265,10 +269,8 @@ if __name__ == "__main__":
     output = os.getcwd()
     if options.output:
         output = options.output
-        try:
-            os.makedirs(output)
-        except FileExistsError:
-            pass
+        os.makedirs(output, exist_ok=True)
+
     output = os.path.join(output, map_basename)
 
     if options.save_atlas:
