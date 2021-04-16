@@ -299,7 +299,18 @@ if __name__ == "__main__":
     clust_bool[((map_arr > thresh_neg_low) & (map_arr < thresh_neg_high)) |
                ((map_arr > thresh_pos_low) & (map_arr < thresh_pos_high))] = True
     map_arr[np.logical_not(clust_bool)] = False
-    map_clustlabels_arr, n_clusts = scipy.ndimage.label(clust_bool)
+    # Clustering by sign
+    clust_bool_pos = clust_bool.copy()
+    clust_bool_pos[map_arr < 0] = False
+    map_clustlabels_arr_pos, n_clusts_pos = scipy.ndimage.label(clust_bool_pos)
+    clust_bool_neg = clust_bool.copy()
+    clust_bool_neg[map_arr > 0] = False
+    map_clustlabels_arr_neg, n_clusts_neg = scipy.ndimage.label(clust_bool_neg)
+    map_clustlabels_arr_neg[map_clustlabels_arr_neg > 0] += map_clustlabels_arr_pos.max()
+    map_clustlabels_arr = map_clustlabels_arr_pos + map_clustlabels_arr_neg
+    n_clusts = n_clusts_neg + n_clusts_pos
+
+    #map_clustlabels_arr, n_clusts = scipy.ndimage.label(clust_bool)
     clust_sizes = scipy.ndimage.measurements.histogram(map_clustlabels_arr, 1,
                                                        n_clusts, n_clusts)
     labels = np.unique(map_clustlabels_arr)[1:]
