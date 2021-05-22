@@ -7,6 +7,7 @@ Created on Mon Sep 21 16:08:02 2020
 """
 import numpy as np
 import nilearn
+import nilearn.plotting
 import matplotlib.pyplot as plt
 
 

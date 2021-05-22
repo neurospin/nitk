@@ -193,6 +193,36 @@ class MapReduce:
 
             return None
 
+    def reset(self, keys, current_state="STARTED"):
+        """Reset state of tasks to INIT (unstarted). Use to reset task that
+        are stuck (that failed) in in STARTED state.
+
+
+        Parameters
+        ----------
+        current_state : str, optional
+            The current state. The default is "STARTED".
+
+        keys : [] or iterable keys, use key_values.keys()
+            Keys to be reseted.
+
+        Returns
+        -------
+        [reseted keys].
+
+        """
+        js = JobSynchronizer(self.shared_dir)
+
+        reseted_keys = list()
+        for key in keys:
+            # previous_state_0 = js.get_state(key=str(key))
+            previous_state_, ok = js.set_state(key=str(key), state="INIT", previous_state=[current_state])
+            if ok:
+                reseted_keys.append(key)
+            # print(previous_state_0, previous_state_, ok)
+
+        return reseted_keys
+
     def make_archive(self):
         make_archive(self.shared_dir, "zip",
                      root_dir=os.path.dirname(self.shared_dir),

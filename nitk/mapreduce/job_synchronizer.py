@@ -56,6 +56,19 @@ class JobSynchronizer:
         lock_filename = log_filename + ".lock"
         return log_filename, lock_filename
 
+    def get_state(self, key):
+        log_filename, lock_filename = self.key_to_filename(key)
+        lock = FileLock(lock_filename)
+        state = None
+        with lock.acquire(timeout=30):
+
+            # Get previous state, if log file doesn't exist: INIT
+            if os.path.exists(log_filename):
+                with open(log_filename, "r") as fd:
+                    state = fd.readline().split(' ')[0]
+
+        return state
+
     def set_state(self, key, state, previous_state=[]):
         """Set state of job identified by key.
         Next call to to `start(key="0")` will returns the current job state: 'STARTED'
