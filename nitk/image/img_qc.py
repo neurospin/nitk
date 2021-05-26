@@ -8,7 +8,7 @@ import pandas as pd
 import nibabel
 from nilearn import plotting
 import sys; sys.path.append('../..')
-from nitk.image.img_to_array import img_to_array
+from nitk.image.niimgs_bids_to_array import niimgs_bids_to_array
 from nitk.image.img_brain_mask import compute_brain_mask
 
 def plot_pca(X, df_description):
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     img_filenames = options.input
     mask_filenames = options.mask
 
-    imgs_arr, df, ref_img = img_to_array(img_filenames)
+    imgs_arr, df, ref_img = niimgs_bids_to_array(img_filenames)
 
     if mask_filenames is None:
         mask_img = compute_brain_mask(imgs_arr, ref_img)

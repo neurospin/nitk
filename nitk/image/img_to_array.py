@@ -15,8 +15,129 @@ import pandas as pd
 import nibabel
 import argparse
 from nitk.bids import get_keys
+import nilearn
 
-def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
+def niimgs_to_array(niimgs):
+    """Ni images to array
+
+
+    Parameters
+    ----------
+    niimgs : [niftii images]
+        List of niftii images.
+
+    Returns
+    -------
+    imgs_arr : array
+        (n_subjects, 1, , image_axis0, image_axis1, ...).
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import nilearn
+    >>> from nilearn import datasets, image
+    >>> rsn = datasets.fetch_atlas_smith_2009()['rsn10']
+    >>> niimgs_list = [image.index_img(rsn, 0), image.index_img(rsn, 1)]
+    >>> from nitk.image import niimgs_to_array
+    >>> niimgs_to_array(niimgs_list).shape
+    (2, 1, 91, 109, 91)
+    """
+    return np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in niimgs])
+
+
+def arr_to_4dniimg(ref_niimg, arr):
+    """Arr to 4d nii image.
+
+    Parameters
+    ----------
+    ref_niimg : niimg
+        reference image.
+    arr : array (n_subjects, 1, , image_axis0, image_axis1, ...).
+        data array.
+    Returns
+    -------
+    4D niimg .
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import nilearn
+    >>> from nilearn import datasets, image
+    >>> rsn = datasets.fetch_atlas_smith_2009()['rsn10']
+    >>> niimgs_list = [image.index_img(rsn, 0), image.index_img(rsn, 1)]
+    >>> # Build 4D with nilearn
+    >>> niimgs_4d = nilearn.image.concat_imgs(niimgs_list)
+    >>> from nitk.image import niimgs_to_array, arr_to_4dniimg
+    >>> # Build arr and convert back to 4D
+    >>> arr = niimgs_to_array(niimgs_list)
+    >>> niimgs_4d_ = arr_to_4dniimg(ref_niimg=niimgs_list[0], arr=arr)
+    >>> np.all(niimgs_4d.get_fdata() == niimgs_4d_.get_fdata())
+    True
+    """
+
+    arr4d_ = np.moveaxis(arr.squeeze(), 0, -1)
+    return nilearn.image.new_img_like(ref_niimg, arr4d_)
+
+
+def vec_to_niimg(vec, mask_img):
+    """Flat vector to nii image, where values within mask are set to vec.
+
+
+    Parameters
+    ----------
+    vec : flat vector
+        vector of values within.
+    mask_img : nii
+        Boolean mask, mask_arr.sum() == len(vec).
+
+    Returns
+    -------
+    nii image similar to mask_img.
+
+    """
+    mask_arr = mask_img.get_fdata() != 0
+    mask_arr.sum() == len(vec), "Missmatch between mask and flat vector"
+    val_arr = np.zeros(mask_img.shape)
+    val_arr[mask_arr] = vec
+    return nibabel.Nifti1Image(val_arr, affine=mask_img.affine)
+
+
+def flat_to_array(data_flat, mask_arr, fill=0):
+    """Flat data (n_subjects x n_features withing a mask) to n_subjects x mask_arr.shape.
+
+
+    Parameters
+    ----------
+    data_flat : array
+        (n_subjects x n_features withing a mask).
+    mask_arr : array
+        3D mask.
+    fill : float
+        out-off mask filling data
+    Returns
+    -------
+    array (n_subjects x mask_arr.shape)
+
+    Examples
+    --------
+    >>> from nitk.image import flat_to_array
+    >>> data_flat = np.zeros((2, 9))
+    >>> data_flat[0, :] = np.arange(0, 9, 1)
+    >>> data_flat[1, :] = np.arange(0, 90, 10)
+    >>> mask_arr = np.ones((3, 3), dtype=bool)
+    >>> np.all(flat_to_array(data_flat, mask_arr).squeeze()[:, mask_arr] == data_flat)
+    True
+    """
+    n_subjects = data_flat.shape[0]
+    assert mask_arr.sum() == data_flat.shape[1]
+    arr = np.zeros([n_subjects, 1] + list(mask_arr.shape))
+    arr[::] = fill
+    arr[:, 0, mask_arr] = data_flat
+
+    return arr
+
+
+def niimgs_bids_to_array(img_filenames, check_same_referential=True, expected=dict()):
     """
     Convert nii images to array (n_subjects, 1, , image_axis0, image_axis1, ...)
     Assume BIDS organisation of file to retrive participant_id and session.
@@ -45,10 +166,10 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
 
     Example
     -------
-    >>> from  nitk.image import img_to_array
+    >>> from  nitk.image import niimgs_bids_to_array
     >>> import glob
     >>> img_filenames = glob.glob("/neurospin/psy/start-icaar-eugei/derivatives/cat12/vbm/sub-*/ses-*/mri/mwp1sub*.nii")
-    >>> imgs_arr, df, ref_img = img_to_array(img_filenames)
+    >>> imgs_arr, df, ref_img = niimgs_bids_to_array(img_filenames)
     >>> print(imgs_arr.shape)
     (171, 1, 121, 145, 121)
     >>> print(df.shape)
@@ -82,14 +203,19 @@ def img_to_array(img_filenames, check_same_referential=True, expected=dict()):
         assert np.all([np.all(img.get_fdata().shape == ref_img.get_fdata().shape) for img in imgs_nii])
 
     # Load image subjects x channels (1) x image
-    imgs_arr = np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in imgs_nii])
+    #imgs_arr = np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in imgs_nii])
+    imgs_arr = niimgs_to_array(imgs_nii)
 
     return imgs_arr, df, ref_img
 
 
+img_to_array = niimgs_bids_to_array # DEPRECATED
+
+
+
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(epilog=img_to_array.__doc__.split('\n')[1].strip())
+    parser = argparse.ArgumentParser(epilog=niimgs_bids_to_array.__doc__.split('\n')[1].strip())
     parser.add_argument('--input', help='list of niftii images', nargs='+', required=True, type=str)
     parser.add_argument('-o', '--output', help='output prefix for csv file', type=str)
     options = parser.parse_args()
@@ -101,7 +227,7 @@ if __name__ == "__main__":
     if options.output is None:
         options.output = "imgs"
 
-    imgs_arr, df, ref_img = img_to_array(options.input, check_same_referential=True, expected=dict())
+    imgs_arr, df, ref_img = niimgs_bids_to_array(options.input, check_same_referential=True, expected=dict())
 
     imgs_arr.tofile(options.output + "_data64.npy")
     df.to_csv(options.output + "_participants.csv", index=False )
