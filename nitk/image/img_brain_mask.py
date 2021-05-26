@@ -22,7 +22,7 @@ import nilearn.masking
 from nilearn.image import resample_to_img
 
 from  nitk.bids import get_keys
-from  nitk.image import img_to_array
+from  nitk.image import niimgs_bids_to_array
 
 
 def rm_small_clusters(mask_arr, clust_size_thres=None):
@@ -182,7 +182,7 @@ def compute_brain_mask(target_img=None, imgs=None, implicitmask_arr=None,
 
     if imgs is not None:
         if isinstance(imgs, list) and len(imgs) >= 1 and isinstance(imgs[0], str):
-            imgs_arr, df, target_img_ = img_to_array(imgs)
+            imgs_arr, df, target_img_ = niimgs_bids_to_array(imgs)
             assert np.all(target_img.affine == target_img_.affine), "Images do not match target_img"
 
         elif isinstance(imgs, np.ndarray) and imgs.ndim >= 5:
