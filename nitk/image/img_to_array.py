@@ -120,6 +120,7 @@ def flat_to_array(data_flat, mask_arr, fill=0):
 
     Examples
     --------
+    >>> import numpy as np
     >>> from nitk.image import flat_to_array
     >>> data_flat = np.zeros((2, 9))
     >>> data_flat[0, :] = np.arange(0, 9, 1)

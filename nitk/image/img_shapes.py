@@ -1,5 +1,5 @@
 """
-Created on ven. 26 févr. 2021 15:35:51 CET
+Created on ven. 26 Feb. 2021 15:35:51 CET
 
 @author: edouard.duchesnay@cea.fr
 """
@@ -25,7 +25,8 @@ def make_sphere(box_shape, center, radius):
 
     Examples
     --------
-    >>> make_sphere(np.zeros((3, 3, 3)), [1, 1, 1], 1)
+    >>> from nitk.image import make_sphere
+    >>> make_sphere((3, 3, 3), [1, 1, 1], 1)
     array([[[False, False, False],
         [False,  True, False],
         [False, False, False]],
