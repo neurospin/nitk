@@ -20,11 +20,9 @@ import nilearn
 def niimgs_to_array(niimgs):
     """Ni images to array
 
-
     Parameters
     ----------
-    niimgs : [niftii images]
-        List of niftii images.
+    niimgs : [nifti images] or single 4D nitfi image.
 
     Returns
     -------
@@ -39,14 +37,31 @@ def niimgs_to_array(niimgs):
     >>> rsn = datasets.fetch_atlas_smith_2009()['rsn10']
     >>> niimgs_list = [image.index_img(rsn, 0), image.index_img(rsn, 1)]
     >>> from nitk.image import niimgs_to_array
-    >>> niimgs_to_array(niimgs_list).shape
+    >>> # From list of ni images
+    >>> arr1 = niimgs_to_array(niimgs_list)
+    >>> arr1.shape
     (2, 1, 91, 109, 91)
+    >>> # From 4D ni images
+    >>> arr2 = niimgs_to_array(image.concat_imgs(niimgs_list))
+    >>> arr2.shape
+    (2, 1, 91, 109, 91)
+    >>> np.all(arr1 == arr2)
+    True
     """
-    return np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in niimgs])
+    if  isinstance(niimgs, list):
+        return np.stack([np.expand_dims(img.get_fdata(), axis=0) for img in niimgs])
 
+    elif isinstance(niimgs, nibabel.nifti1.Nifti1Image) and niimgs.ndim == 4:
+        arr = niimgs.get_fdata()
+        arr = np.expand_dims(arr, axis=0)
+        arr = np.moveaxis(arr, -1, 0)
+        return arr
 
-def arr_to_4dniimg(ref_niimg, arr):
-    """Arr to 4d nii image.
+    else:
+        assert False, "Wrong input"
+
+def array_to_niimgs(ref_niimg, arr):
+    """Arr to 4d nii images.
 
     Parameters
     ----------
@@ -56,7 +71,7 @@ def arr_to_4dniimg(ref_niimg, arr):
         data array.
     Returns
     -------
-    4D niimg .
+    4D nitfi images.
 
     Examples
     --------
@@ -67,10 +82,10 @@ def arr_to_4dniimg(ref_niimg, arr):
     >>> niimgs_list = [image.index_img(rsn, 0), image.index_img(rsn, 1)]
     >>> # Build 4D with nilearn
     >>> niimgs_4d = nilearn.image.concat_imgs(niimgs_list)
-    >>> from nitk.image import niimgs_to_array, arr_to_4dniimg
+    >>> from nitk.image import niimgs_to_array, array_to_niimgs
     >>> # Build arr and convert back to 4D
     >>> arr = niimgs_to_array(niimgs_list)
-    >>> niimgs_4d_ = arr_to_4dniimg(ref_niimg=niimgs_list[0], arr=arr)
+    >>> niimgs_4d_ = array_to_niimgs(ref_niimg=niimgs_list[0], arr=arr)
     >>> np.all(niimgs_4d.get_fdata() == niimgs_4d_.get_fdata())
     True
     """
@@ -78,6 +93,23 @@ def arr_to_4dniimg(ref_niimg, arr):
     arr4d_ = np.moveaxis(arr.squeeze(), 0, -1)
     return nilearn.image.new_img_like(ref_niimg, arr4d_)
 
+
+def niimgs_to_arr(niimgs):
+    """4d nii images to arr.
+
+
+    Parameters
+    ----------
+    niimgs : 4D nitfi images.
+        4D nitfi images..
+
+    Returns
+    -------
+    arr.
+
+    """
+
+    return np.moveaxis(niimgs.get_fdata().squeeze(), 0, -1)
 
 def vec_to_niimg(vec, mask_img):
     """Flat vector to nii image, where values within mask are set to vec.
@@ -96,7 +128,7 @@ def vec_to_niimg(vec, mask_img):
 
     """
     mask_arr = mask_img.get_fdata() != 0
-    mask_arr.sum() == len(vec), "Missmatch between mask and flat vector"
+    assert mask_arr.sum() == len(vec), "Missmatch between mask and flat vector"
     val_arr = np.zeros(mask_img.shape)
     val_arr[mask_arr] = vec
     return nibabel.Nifti1Image(val_arr, affine=mask_img.affine)

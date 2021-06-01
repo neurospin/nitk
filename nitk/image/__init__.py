@@ -7,7 +7,7 @@ Created on Wed Feb  5 11:12:53 2020
 """
 
 from .img_to_array import img_to_array  # DEPRECATED
-from .img_to_array import niimgs_to_array, niimgs_bids_to_array, arr_to_4dniimg
+from .img_to_array import niimgs_to_array, niimgs_bids_to_array, array_to_niimgs
 from .img_to_array import vec_to_niimg
 from .img_search_light import search_light
 
@@ -20,7 +20,7 @@ from .img_shapes import make_sphere
 
 __all__ = ['img_to_array',  # DEPRECATED
            'niimgs_to_array',
-           'arr_to_4dniimg',
+           'array_to_niimgs',
            'vec_to_img',
            'flat_to_array'
            'compute_brain_mask', 'rm_small_clusters',
