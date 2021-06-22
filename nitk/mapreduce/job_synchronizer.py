@@ -31,7 +31,7 @@ class JobSynchronizer:
 
     Example
     -------
-    >>> from nitk.utils import JobSynchronizer
+    >>> from nitk.mapreduce import JobSynchronizer
     >>> import tempfile
     >>> js = JobSynchronizer(tempfile.mkdtemp(prefix="jobsynchro_"))
 

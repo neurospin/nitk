@@ -206,6 +206,9 @@ class MapReduce:
         keys : [] or iterable keys, use key_values.keys()
             Keys to be reseted.
 
+        dry : bool
+            dry run? (default False)
+
         Returns
         -------
         [reseted keys].
@@ -215,13 +218,37 @@ class MapReduce:
 
         reseted_keys = list()
         for key in keys:
-            # previous_state_0 = js.get_state(key=str(key))
             previous_state_, ok = js.set_state(key=str(key), state="INIT", previous_state=[current_state])
             if ok:
                 reseted_keys.append(key)
             # print(previous_state_0, previous_state_, ok)
-
         return reseted_keys
+
+
+    def get_states(self, keys):
+        """Get state of tasks.
+
+
+        Parameters
+        ----------
+
+        keys : [] or iterable keys, use key_values.keys()
+            Keys to be reseted.
+
+        Returns
+        -------
+        [(key, state), ].
+
+        """
+        js = JobSynchronizer(self.shared_dir)
+        # key = list(keys)[0]
+
+        key_states = list()
+        for key in keys:
+            state = js.get_state(key=str(key))
+            key_states.append((key, state))
+
+        return key_states
 
     def make_archive(self):
         make_archive(self.shared_dir, "zip",
