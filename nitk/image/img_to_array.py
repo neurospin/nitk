@@ -94,24 +94,32 @@ def array_to_niimgs(ref_niimg, arr):
     return nilearn.image.new_img_like(ref_niimg, arr4d_)
 
 
-def niimgs_to_arr(niimgs):
-    """4d nii images to arr.
+def vec_to_arr(vec, mask_arr, fill=0):
+    """Flat vector to nii image, where values within mask are set to vec.
 
 
     Parameters
     ----------
-    niimgs : 4D nitfi images.
-        4D nitfi images..
+    vec : flat vector
+        vector of values within.
+    mask_arr : array
+        Boolean mask, mask_arr.sum() == len(vec).
 
     Returns
     -------
-    arr.
+    array similar to mask_arr.
 
     """
+    assert mask_arr.sum() == len(vec), "Missmatch between mask and flat vector"
+    arr = np.zeros(mask_arr.shape)
+    if fill != 0:
+        arr[::] = fill
 
-    return np.moveaxis(niimgs.get_fdata().squeeze(), 0, -1)
+    arr[mask_arr] = vec
+    return arr
 
-def vec_to_niimg(vec, mask_img):
+
+def vec_to_niimg(vec, mask_img, fill=0):
     """Flat vector to nii image, where values within mask are set to vec.
 
 
@@ -127,11 +135,9 @@ def vec_to_niimg(vec, mask_img):
     nii image similar to mask_img.
 
     """
-    mask_arr = mask_img.get_fdata() != 0
-    assert mask_arr.sum() == len(vec), "Missmatch between mask and flat vector"
-    val_arr = np.zeros(mask_img.shape)
-    val_arr[mask_arr] = vec
-    return nibabel.Nifti1Image(val_arr, affine=mask_img.affine)
+
+    arr = vec_to_arr(vec, mask_img.get_fdata() != 0, fill=fill)
+    return nibabel.Nifti1Image(arr, affine=mask_img.affine)
 
 
 def flat_to_array(data_flat, mask_arr, fill=0):
@@ -162,7 +168,7 @@ def flat_to_array(data_flat, mask_arr, fill=0):
     True
     """
     n_subjects = data_flat.shape[0]
-    assert mask_arr.sum() == data_flat.shape[1]
+    assert mask_arr.sum() == data_flat.shape[1],  "Missmatch between mask and flat data"
     arr = np.zeros([n_subjects, 1] + list(mask_arr.shape))
     arr[::] = fill
     arr[:, 0, mask_arr] = data_flat
