@@ -189,6 +189,32 @@ def fetch_cortex(fsl_home = "/usr/share/fsl"):
     cort_arr = rm_small_clusters(cort_arr, clust_size_thres=10000)
     return nilearn.image.new_img_like(cort_img, cort_arr)
 
+
+###############################################################################
+# Neuromorphometrics
+
+def match_atlas_neuromorphometrics_roi_to_lobe():
+    """Roi to lobe mapping of Neuromorphometrics atlas.
+    
+    Returns
+    -------
+    map_roi_to_lobes : DataFrame
+        atlas.
+
+    Notes
+    -----
+    Mapping done by iris menu <iris.menu@hotmail.fr> 2021/07/08
+
+    lobes_Neuromorphometrics.csv : ROI to lobe mapping
+    http://neuromorphometrics.com/ParcellationProtocol_2010-04-05.PDF
+    https://scalablebrainatlas.incf.org/human/NMM1103
+    """
+    mapping_dirname = os.path.dirname(os.path.abspath(__file__))
+    map_roi_to_lobes = pd.read_csv(os.path.join(mapping_dirname,
+                                                "lobes_Neuromorphometrics.csv"))
+    return map_roi_to_lobes
+
+
 if __name__ == "__main__":
     # Set default values to parameters
     parser = argparse.ArgumentParser(epilog=epilog)

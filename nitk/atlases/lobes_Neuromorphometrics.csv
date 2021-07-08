@@ -1,0 +1,286 @@
+﻿ROIid;ROIabbr;ROIname;ROIbaseid;ROIbasename;hemisphere;volume;lobe;lobe_abbreviation;subarea;note;include
+1;l3thVen_GM_Vol;Left Third Ventricle;[ 4 ];Both:3rd-Ventricle;l;GM;Ventricles;VEN;;;yes
+2;r3thVen_GM_Vol;Right Third Ventricle;[ 4 ];Both:3rd-Ventricle;r;GM;Ventricles;VEN;;;yes
+3;l4thVen_GM_Vol;Left Fourth Ventricle;[ 11 ];Both:4th-Ventricle;l;GM;Ventricles;VEN;;;yes
+4;r4thVen_GM_Vol;Right Fourth Ventricle;[ 11 ];Both:4th-Ventricle;r;GM;Ventricles;VEN;;;yes
+5;lAcc_GM_Vol;Left Accumbens;[ 23 30 ];Left/Right:Accumbens-Area;l;GM;Striatum;SR;;;yes
+6;rAcc_GM_Vol;Right Accumbens;[ 23 30 ];Left/Right:Accumbens-Area;r;GM;Striatum;SR;;;yes
+7;lAmy_GM_Vol;Left Amygdala;[ 31 32 ];Left/Right:Amygdala;l;GM;Limbic ;LC;;;yes
+8;rAmy_GM_Vol;Right Amygdala;[ 31 32 ];Left/Right:Amygdala;r;GM;Limbic ;LC;;;yes
+9;lBst_GM_Vol;Left Brainstem;[ 35 ];Both:Brain-Stem;l;GM;Stem;SE;;;yes
+10;rBst_GM_Vol;Right Brainstem;[ 35 ];Both:Brain-Stem;r;GM;Stem;SE;;;yes
+11;lCau_GM_Vol;Left Caudate;[ 36 37 ];Left/Right:Caudate;l;GM;Striatum;SR;;;yes
+12;rCau_GM_Vol;Right Caudate;[ 36 37 ];Left/Right:Caudate;r;GM;Striatum;SR;;;yes
+13;lExtCbe_GM_Vol;Left Exterior Cerebellum;[ 38 39 ];Left/Right:Cerebellum-Exterior;l;GM;Cerebellum;CB;;;yes
+14;rExtCbe_GM_Vol;Right Exterior Cerebellum;[ 38 39 ];Left/Right:Cerebellum-Exterior;r;GM;Cerebellum;CB;;;yes
+15;lCbeWM_GM_Vol;Left Cerebellum White Matter;[ 40 41 ];Left/Right:Cerebellum-White-Matter;l;GM;Cerebellum;CB;;;yes
+16;rCbeWM_GM_Vol;Right Cerebellum White Matter;[ 40 41 ];Left/Right:Cerebellum-White-Matter;r;GM;Cerebellum;CB;;;yes
+17;lCbrWM_GM_Vol;Left Cerebral White Matter;[ 44 45 ];Left/Right:Cerebral-White-Matter;l;GM;;;;;yes
+18;rCbrWM_GM_Vol;Right Cerebral White Matter;[ 44 45 ];Left/Right:Cerebral-White-Matter;r;GM;;;;;yes
+19;lCSF_GM_Vol;Left CSF;[ 46 ];Both:CSF;l;GM;;;;;yes
+20;rCSF_GM_Vol;Right CSF;[ 46 ];Both:CSF;r;GM;;;;;yes
+21;lHip_GM_Vol;Left Hippocampus;[ 47 48 ];Left/Right:Hippocampus;l;GM;Limbic ;LC;;;yes
+22;rHip_GM_Vol;Right Hippocampus;[ 47 48 ];Left/Right:Hippocampus;r;GM;Limbic ;LC;;;yes
+23;lInfLatVen_GM_Vol;Left Inferior Lateral Ventricle;[ 49 50 ];Left/Right:Inf-Lat-Vent;l;GM;Ventricles;VEN;;;yes
+24;rInfLatVen_GM_Vol;Right Inferior Lateral Ventricle;[ 49 50 ];Left/Right:Inf-Lat-Vent;r;GM;Ventricles;VEN;;;yes
+25;lLatVen_GM_Vol;Left Lateral Ventricle;[ 51 52 ];Left/Right:Lateral-Ventricle;l;GM;Ventricles;VEN;;;yes
+26;rLatVen_GM_Vol;Right Lateral Ventricle;[ 51 52 ];Left/Right:Lateral-Ventricle;r;GM;Ventricles;VEN;;;yes
+27;lPal_GM_Vol;Left Pallidum;[ 55 56 ];Left/Right:Pallidum;l;GM;Striatum;SR;;;yes
+28;rPal_GM_Vol;Right Pallidum;[ 55 56 ];Left/Right:Pallidum;r;GM;Striatum;SR;;;yes
+29;lPut_GM_Vol;Left Putamen;[ 57 58 ];Left/Right:Putamen;l;GM;Striatum;SR;;;yes
+30;rPut_GM_Vol;Right Putamen;[ 57 58 ];Left/Right:Putamen;r;GM;Striatum;SR;;;yes
+31;lThaPro_GM_Vol;Left Thalamus Proper;[ 59 60 ];Left/Right:Thalamus-Proper;l;GM;Limbic ;LC;;;yes
+32;rThaPro_GM_Vol;Right Thalamus Proper;[ 59 60 ];Left/Right:Thalamus-Proper;r;GM;Limbic ;LC;;;yes
+33;lVenVen_GM_Vol;Left Ventral Ventricle;[ 61 62 ];Left/Right:Ventral-DC;l;GM;Ventricles;VEN;;;yes
+34;rVenVen_GM_Vol;Right Ventral Ventricle;[ 61 62 ];Left/Right:Ventral-DC;r;GM;Ventricles;VEN;;;yes
+35;lOC_GM_Vol;Left Optic Chiasm;[ 69 ];Both:Optic-Chiasm;l;GM;;;;;yes
+36;rOC_GM_Vol;Right Optic Chiasm;[ 69 ];Both:Optic-Chiasm;r;GM;;;;;yes
+37;lCbeLoCbe1-5_GM_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules I-V;[ 71 ];Both:Cerebellar-Vermal-Lobules-I-V;l;GM;Cerebellum;CB;;;yes
+38;rCbeLoCbe1-5_GM_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules I-V;[ 71 ];Both:Cerebellar-Vermal-Lobules-I-V;r;GM;Cerebellum;CB;;;yes
+39;lCbeLoCbe6-7_GM_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules VI-VII;[ 72 ];Both:Cerebellar-Vermal-Lobules-VI-VII;l;GM;Cerebellum;CB;;;yes
+40;rCbeLoCbe6-7_GM_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules VI-VII;[ 72 ];Both:Cerebellar-Vermal-Lobules-VI-VII;r;GM;Cerebellum;CB;;;yes
+41;lCbeLoCbe8-10_GM_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules VIII-X;[ 73 ];Both:Cerebellar-Vermal-Lobules-VIII-X;l;GM;Cerebellum;CB;;;yes
+42;rCbeLoCbe8-10_GM_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules VIII-X;[ 73 ];Both:Cerebellar-Vermal-Lobules-VIII-X;r;GM;Cerebellum;CB;;;yes
+43;lBasCbr+FobBr_GM_Vol;Left Basal Cerebrum and Forebrain Brain;[ 75 76 ];Left/Right:Basal-Forebrain;l;GM;;;;;yes
+44;rBasCbr+FobBr_GM_Vol;Right Basal Cerebrum and Forebrain Brain;[ 75 76 ];Left/Right:Basal-Forebrain;r;GM;;;;;yes
+45;lAntCinGy_GM_Vol;Left Anterior Cingulate Gyrus;[ 100 101 ];Left/Right:ACgG-anterior-cingulate-gyrus;l;GM;Limbic ;LC;cingulate cortex;;yes
+46;rAntCinGy_GM_Vol;Right Anterior Cingulate Gyrus;[ 100 101 ];Left/Right:ACgG-anterior-cingulate-gyrus;r;GM;Limbic ;LC;cingulate cortex;;yes
+47;lAntIns_GM_Vol;Left Anterior Insula;[ 102 103 ];Left/Right:AIns-anterior-insula;l;GM;Frontal;FL;insular region;;yes
+48;rAntIns_GM_Vol;Right Anterior Insula;[ 102 103 ];Left/Right:AIns-anterior-insula;r;GM;Frontal;FL;insular region;;yes
+49;lAntOrbGy_GM_Vol;Left Anterior Orbital Gyrus;[ 104 105 ];Left/Right:AOrG-anterior-orbital-gyrus;l;GM;Frontal;FL;inferior surface;;yes
+50;rAntOrbGy_GM_Vol;Right Anterior Orbital Gyrus;[ 104 105 ];Left/Right:AOrG-anterior-orbital-gyrus;r;GM;Frontal;FL;inferior surface;;yes
+51;lAngGy_GM_Vol;Left Angular Gyrus;[ 106 107 ];Left/Right:AnG-angular-gyrus;l;GM;Parietal;PL;lateral surface;;yes
+52;rAngGy_GM_Vol;Right Angular Gyrus;[ 106 107 ];Left/Right:AnG-angular-gyrus;r;GM;Parietal;PL;lateral surface;;yes
+53;lCal+Cbr_GM_Vol;Left Calcarine and Cerebrum;[ 108 109 ];Left/Right:Calc-calcarine-cortex;l;GM;Occipital;OL;medial surface;optional;no
+54;rCal+Cbr_GM_Vol;Right Calcarine and Cerebrum;[ 108 109 ];Left/Right:Calc-calcarine-cortex;r;GM;Occipital;OL;medial surface;optional;no
+55;lCenOpe_GM_Vol;Left Central Operculum;[ 112 113 ];Left/Right:CO-central-operculum;l;GM;Frontal;FL;opercular region;;yes
+56;rCenOpe_GM_Vol;Right Central Operculum;[ 112 113 ];Left/Right:CO-central-operculum;r;GM;Frontal;FL;opercular region;;yes
+57;lCun_GM_Vol;Left Cuneus;[ 114 115 ];Left/Right:Cun-cuneus;l;GM;Occipital;OL;medial surface;;yes
+58;rCun_GM_Vol;Right Cuneus;[ 114 115 ];Left/Right:Cun-cuneus;r;GM;Occipital;OL;medial surface;;yes
+59;lEnt_GM_Vol;Left Entorhinal Area;[ 116 117 ];Left/Right:Ent-entorhinal-area;l;GM;Limbic ;LC;medial temporal cortex;;yes
+60;rEnt_GM_Vol;Right Entorhinal Area;[ 116 117 ];Left/Right:Ent-entorhinal-area;r;GM;Limbic ;LC;medial temporal cortex;;yes
+61;lFroOpe_GM_Vol;Left Frontal Operculum;[ 118 119 ];Left/Right:FO-frontal-operculum;l;GM;Frontal;FL;opercular region;;yes
+62;rFroOpe_GM_Vol;Right Frontal Operculum;[ 118 119 ];Left/Right:FO-frontal-operculum;r;GM;Frontal;FL;opercular region;;yes
+63;lFroPo_GM_Vol;Left Frontal Pole;[ 120 121 ];Left/Right:FRP-frontal-pole;l;GM;Frontal;FL;lateral surface;;yes
+64;rFroPo_GM_Vol;Right Frontal Pole;[ 120 121 ];Left/Right:FRP-frontal-pole;r;GM;Frontal;FL;lateral surface;;yes
+65;lFusGy_GM_Vol;Left Fusiform Gyrus;[ 122 123 ];Left/Right:FuG-fusiform-gyrus;l;GM;Temporal;TL;inferior surface;;yes
+66;rFusGy_GM_Vol;Right Fusiform Gyrus;[ 122 123 ];Left/Right:FuG-fusiform-gyrus;r;GM;Temporal;TL;inferior surface;;yes
+67;lRecGy_GM_Vol;Left Gyrus Rectus;[ 124 125 ];Left/Right:GRe-gyrus-rectus;l;GM;Frontal;FL;medial surface;optional: is subset of medial frontal cortex;no
+68;rRecGy_GM_Vol;Right Gyrus Rectus;[ 124 125 ];Left/Right:GRe-gyrus-rectus;r;GM;Frontal;FL;medial surface;optional: is subset of medial frontal cortex;no
+69;lInfOccGy_GM_Vol;Left Inferior Occipital Gyrus;[ 128 129 ];Left/Right:IOG-inferior-occipital-gyrus;l;GM;Occipital;OL;lateral surface;;yes
+70;rInfOccGy_GM_Vol;Right Inferior Occipital Gyrus;[ 128 129 ];Left/Right:IOG-inferior-occipital-gyrus;r;GM;Occipital;OL;lateral surface;;yes
+71;lInfTemGy_GM_Vol;Left Inferior Temporal Gyrus;[ 132 133 ];Left/Right:ITG-inferior-temporal-gyrus;l;GM;Temporal;TL;lateral surface;;yes
+72;rInfTemGy_GM_Vol;Right Inferior Temporal Gyrus;[ 132 133 ];Left/Right:ITG-inferior-temporal-gyrus;r;GM;Temporal;TL;lateral surface;;yes
+73;lLinGy_GM_Vol;Left Lingual Gyrus;[ 134 135 ];Left/Right:LiG-lingual-gyrus;l;GM;Occipital;OL;medial surface;;yes
+74;rLinGy_GM_Vol;Right Lingual Gyrus;[ 134 135 ];Left/Right:LiG-lingual-gyrus;r;GM;Occipital;OL;medial surface;;yes
+75;lLatOrbGy_GM_Vol;Left Lateral Orbital Gyrus;[ 136 137 ];Left/Right:LOrG-lateral-orbital-gyrus;l;GM;Frontal;FL;inferior surface;;yes
+76;rLatOrbGy_GM_Vol;Right Lateral Orbital Gyrus;[ 136 137 ];Left/Right:LOrG-lateral-orbital-gyrus;r;GM;Frontal;FL;inferior surface;;yes
+77;lMidCinGy_GM_Vol;Left Middle Cingulate Gyrus;[ 138 139 ];Left/Right:MCgG-middle-cingulate-gyrus;l;GM;Limbic ;LC;cingulate cortex;;yes
+78;rMidCinGy_GM_Vol;Right Middle Cingulate Gyrus;[ 138 139 ];Left/Right:MCgG-middle-cingulate-gyrus;r;GM;Limbic ;LC;cingulate cortex;;yes
+79;lMedFroCbr_GM_Vol;Left Medial Frontal Cerebrum;[ 140 141 ];Left/Right:MFC-medial-frontal-cortex;l;GM;Frontal;FL;medial surface;optional;no
+80;rMedFroCbr_GM_Vol;Right Medial Frontal Cerebrum;[ 140 141 ];Left/Right:MFC-medial-frontal-cortex;r;GM;Frontal;FL;medial surface;optional;no
+81;lMidFroGy_GM_Vol;Left Middle Frontal Gyrus;[ 142 143 ];Left/Right:MFG-middle-frontal-gyrus;l;GM;Frontal;FL;lateral surface;;yes
+82;rMidFroGy_GM_Vol;Right Middle Frontal Gyrus;[ 142 143 ];Left/Right:MFG-middle-frontal-gyrus;r;GM;Frontal;FL;lateral surface;;yes
+83;lMidOccGy_GM_Vol;Left Middle Occipital Gyrus;[ 144 145 ];Left/Right:MOG-middle-occipital-gyrus;l;GM;Occipital;OL;lateral surface;optional;no
+84;rMidOccGy_GM_Vol;Right Middle Occipital Gyrus;[ 144 145 ];Left/Right:MOG-middle-occipital-gyrus;r;GM;Occipital;OL;lateral surface;optional;no
+85;lMedOrbGy_GM_Vol;Left Medial Orbital Gyrus;[ 146 147 ];Left/Right:MOrG-medial-orbital-gyrus;l;GM;Frontal;FL;inferior surface;;yes
+86;rMedOrbGy_GM_Vol;Right Medial Orbital Gyrus;[ 146 147 ];Left/Right:MOrG-medial-orbital-gyrus;r;GM;Frontal;FL;inferior surface;;yes
+87;lMedPoCGy_GM_Vol;Left Medial Postcentral Gyrus;[ 148 149 ];Left/Right:MPoG-postcentral-gyrus-medial-segment;l;GM;Parietal;PL;medial surface;medial segment;yes
+88;rMedPoCGy_GM_Vol;Right Medial Postcentral Gyrus;[ 148 149 ];Left/Right:MPoG-postcentral-gyrus-medial-segment;r;GM;Parietal;PL;medial surface;medial segment;yes
+89;lMedPrcGy_GM_Vol;Left Medial Precentral Gyrus;[ 150 151 ];Left/Right:MPrG-precentral-gyrus-medial-segment;l;GM;Frontal;FL;medial surface;medial segment;yes
+90;rMedPrcGy_GM_Vol;Right Medial Precentral Gyrus;[ 150 151 ];Left/Right:MPrG-precentral-gyrus-medial-segment;r;GM;Frontal;FL;medial surface;medial segment;yes
+91;lSupMedFroGy_GM_Vol;Left Superior Medial Frontal Gyrus;[ 152 153 ];Left/Right:MSFG-superior-frontal-gyrus-medial-segment;l;GM;Frontal;FL;medial surface;medial segment;yes
+92;rSupMedFroGy_GM_Vol;Right Superior Medial Frontal Gyrus;[ 152 153 ];Left/Right:MSFG-superior-frontal-gyrus-medial-segment;r;GM;Frontal;FL;medial surface;medial segment;yes
+93;lMidTemGy_GM_Vol;Left Middle Temporal Gyrus;[ 154 155 ];Left/Right:MTG-middle-temporal-gyrus;l;GM;Temporal;TL;lateral surface;;yes
+94;rMidTemGy_GM_Vol;Right Middle Temporal Gyrus;[ 154 155 ];Left/Right:MTG-middle-temporal-gyrus;r;GM;Temporal;TL;lateral surface;;yes
+95;lOccPo_GM_Vol;Left Occipital Pole;[ 156 157 ];Left/Right:OCP-occipital-pole;l;GM;Occipital;OL;lateral surface;;yes
+96;rOccPo_GM_Vol;Right Occipital Pole;[ 156 157 ];Left/Right:OCP-occipital-pole;r;GM;Occipital;OL;lateral surface;;yes
+97;lOccFusGy_GM_Vol;Left Occipital Fusiform Gyrus;[ 160 161 ];Left/Right:OFuG-occipital-fusiform-gyrus;l;GM;Occipital;OL;inferior surface;optional;no
+98;rOccFusGy_GM_Vol;Right Occipital Fusiform Gyrus;[ 160 161 ];Left/Right:OFuG-occipital-fusiform-gyrus;r;GM;Occipital;OL;inferior surface;optional;no
+99;lInfFroGy_GM_Vol;Left Inferior Frontal Gyrus;[ 162 163 ];Left/Right:OpIFG-opercular-part-of-the-inferior-frontal-gyrus;l;GM;Frontal;FL;;;yes
+100;rInfFroGy_GM_Vol;Right Inferior Frontal Gyrus;[ 162 163 ];Left/Right:OpIFG-opercular-part-of-the-inferior-frontal-gyrus;r;GM;Frontal;FL;;;yes
+101;lInfFroOrbGy_GM_Vol;Left Inferior Frontal Orbital Gyrus;[ 164 165 ];Left/Right:OrIFG-orbital-part-of-the-inferior-frontal-gyrus;l;GM;Frontal;FL;;;yes
+102;rInfFroOrbGy_GM_Vol;Right Inferior Frontal Orbital Gyrus;[ 164 165 ];Left/Right:OrIFG-orbital-part-of-the-inferior-frontal-gyrus;r;GM;Frontal;FL;;;yes
+103;lPosCinGy_GM_Vol;Left Posterior Cingulate Gyrus;[ 166 167 ];Left/Right:PCgG-posterior-cingulate-gyrus;l;GM;Limbic ;LC;cingulate cortex;;yes
+104;rPosCinGy_GM_Vol;Right Posterior Cingulate Gyrus;[ 166 167 ];Left/Right:PCgG-posterior-cingulate-gyrus;r;GM;Limbic ;LC;cingulate cortex;;yes
+105;lPCu_GM_Vol;Left Precuneus;[ 168 169 ];Left/Right:PCu-precuneus;l;GM;Parietal;PL;medial surface;;yes
+106;rPCu_GM_Vol;Right Precuneus;[ 168 169 ];Left/Right:PCu-precuneus;r;GM;Parietal;PL;medial surface;;yes
+107;lParHipGy_GM_Vol;Left Parahippocampus Gyrus;[ 170 171 ];Left/Right:PHG-parahippocampal-gyrus;l;GM;Limbic ;LC;medial temporal cortex;;yes
+108;rParHipGy_GM_Vol;Right Parahippocampus Gyrus;[ 170 171 ];Left/Right:PHG-parahippocampal-gyrus;r;GM;Limbic ;LC;medial temporal cortex;;yes
+109;lPosIns_GM_Vol;Left Posterior Insula;[ 172 173 ];Left/Right:PIns-posterior-insula;l;GM;Frontal;FL;insular region;;yes
+110;rPosIns_GM_Vol;Right Posterior Insula;[ 172 173 ];Left/Right:PIns-posterior-insula;r;GM;Frontal;FL;insular region;;yes
+111;lParOpe_GM_Vol;Left Parietal Operculum;[ 174 175 ];Left/Right:PO-parietal-operculum;l;GM;Frontal;FL;opercular region;;yes
+112;rParOpe_GM_Vol;Right Parietal Operculum;[ 174 175 ];Left/Right:PO-parietal-operculum;r;GM;Frontal;FL;opercular region;;yes
+113;lPoCGy_GM_Vol;Left Postcentral Gyrus;[ 176 177 ];Left/Right:PoG-postcentral-gyrus;l;GM;Parietal;PL;lateral surface;;yes
+114;rPoCGy_GM_Vol;Right Postcentral Gyrus;[ 176 177 ];Left/Right:PoG-postcentral-gyrus;r;GM;Parietal;PL;lateral surface;;yes
+115;lPosOrbGy_GM_Vol;Left Posterior Orbital Gyrus;[ 178 179 ];Left/Right:POrG-posterior-orbital-gyrus;l;GM;Frontal;FL;inferior surface;;yes
+116;rPosOrbGy_GM_Vol;Right Posterior Orbital Gyrus;[ 178 179 ];Left/Right:POrG-posterior-orbital-gyrus;r;GM;Frontal;FL;inferior surface;;yes
+117;lPla_GM_Vol;Left Planum Polare;[ 180 181 ];Left/Right:PP-planum-polare;l;GM;Temporal;TL;supratemporal surface;optional;no
+118;rPla_GM_Vol;Right Planum Polare;[ 180 181 ];Left/Right:PP-planum-polare;r;GM;Temporal;TL;supratemporal surface;optional;no
+119;lPrcGy_GM_Vol;Left Precentral Gyrus;[ 182 183 ];Left/Right:PrG-precentral-gyrus;l;GM;Frontal;FL;lateral surface;;yes
+120;rPrcGy_GM_Vol;Right Precentral Gyrus;[ 182 183 ];Left/Right:PrG-precentral-gyrus;r;GM;Frontal;FL;lateral surface;;yes
+121;lTem_GM_Vol;Left Temporal;[ 184 185 ];Left/Right:PT-planum-temporale;l;GM;Temporal;TL;;;yes
+122;rTem_GM_Vol;Right Temporal;[ 184 185 ];Left/Right:PT-planum-temporale;r;GM;Temporal;TL;;;yes
+123;lSCA_GM_Vol;Left Subcallosal Area;[ 186 187 ];Left/Right:SCA-subcallosal-area;l;GM;Frontal;FL;medial surface;optional;no
+124;rSCA_GM_Vol;Right Subcallosal Area;[ 186 187 ];Left/Right:SCA-subcallosal-area;r;GM;Frontal;FL;medial surface;optional;no
+125;lSupFroGy_GM_Vol;Left Superior Frontal Gyrus;[ 190 191 ];Left/Right:SFG-superior-frontal-gyrus;l;GM;Frontal;FL;lateral surface;;yes
+126;rSupFroGy_GM_Vol;Right Superior Frontal Gyrus;[ 190 191 ];Left/Right:SFG-superior-frontal-gyrus;r;GM;Frontal;FL;lateral surface;;yes
+127;lCbr+Mot_GM_Vol;Left Cerebrum and Motor;[ 192 193 ];Left/Right:SMC-supplementary-motor-cortex;l;GM;Frontal;FL;;;yes
+128;rCbr+Mot_GM_Vol;Right Cerebrum and Motor;[ 192 193 ];Left/Right:SMC-supplementary-motor-cortex;r;GM;Frontal;FL;;;yes
+129;lSupMarGy_GM_Vol;Left Supramarginal Gyrus;[ 194 195 ];Left/Right:SMG-supramarginal-gyrus;l;GM;Parietal;PL;lateral surface;;yes
+130;rSupMarGy_GM_Vol;Right Supramarginal Gyrus;[ 194 195 ];Left/Right:SMG-supramarginal-gyrus;r;GM;Parietal;PL;lateral surface;;yes
+131;lSupOccGy_GM_Vol;Left Superior Occipital Gyrus;[ 196 197 ];Left/Right:SOG-superior-occipital-gyrus;l;GM;Occipital;OL;lateral surface;;yes
+132;rSupOccGy_GM_Vol;Right Superior Occipital Gyrus;[ 196 197 ];Left/Right:SOG-superior-occipital-gyrus;r;GM;Occipital;OL;lateral surface;;yes
+133;lSupParLo_GM_Vol;Left Superior Parietal Lobule;[ 198 199 ];Left/Right:SPL-superior-parietal-lobule;l;GM;Parietal;PL;lateral surface;;yes
+134;rSupParLo_GM_Vol;Right Superior Parietal Lobule;[ 198 199 ];Left/Right:SPL-superior-parietal-lobule;r;GM;Parietal;PL;lateral surface;;yes
+135;lSupTemGy_GM_Vol;Left Superior Temporal Gyrus;[ 200 201 ];Left/Right:STG-superior-temporal-gyrus;l;GM;Temporal;TL;lateral surface;;yes
+136;rSupTemGy_GM_Vol;Right Superior Temporal Gyrus;[ 200 201 ];Left/Right:STG-superior-temporal-gyrus;r;GM;Temporal;TL;lateral surface;;yes
+137;lTemPo_GM_Vol;Left Temporal Pole;[ 202 203 ];Left/Right:TMP-temporal-pole;l;GM;Temporal;TL;lateral surface;;yes
+138;rTemPo_GM_Vol;Right Temporal Pole;[ 202 203 ];Left/Right:TMP-temporal-pole;r;GM;Temporal;TL;lateral surface;;yes
+139;lInfFroAngGy_GM_Vol;Left Inferior Frontal Angular Gyrus;[ 204 205 ];Left/Right:TrIFG-triangular-part-of-the-inferior-frontal-gyrus;l;GM;Frontal;FL;;;yes
+140;rInfFroAngGy_GM_Vol;Right Inferior Frontal Angular Gyrus;[ 204 205 ];Left/Right:TrIFG-triangular-part-of-the-inferior-frontal-gyrus;r;GM;Frontal;FL;;;yes
+141;lTemTraGy_GM_Vol;Left Temporal Transverse Gyrus;[ 206 207 ];Left/Right:TTG-transverse-temporal-gyrus;l;GM;Temporal;TL;supratemporal surface;optional;no
+142;rTemTraGy_GM_Vol;Right Temporal Transverse Gyrus;[ 206 207 ];Left/Right:TTG-transverse-temporal-gyrus;r;GM;Temporal;TL;supratemporal surface;optional;no
+1;l3thVen_CSF_Vol;Left Third Ventricle;[ 4 ];Both:3rd-Ventricle;l;CSF;Ventricles;VEN;;;yes
+2;r3thVen_CSF_Vol;Right Third Ventricle;[ 4 ];Both:3rd-Ventricle;r;CSF;Ventricles;VEN;;;yes
+3;l4thVen_CSF_Vol;Left Fourth Ventricle;[ 11 ];Both:4th-Ventricle;l;CSF;Ventricles;VEN;;;yes
+4;r4thVen_CSF_Vol;Right Fourth Ventricle;[ 11 ];Both:4th-Ventricle;r;CSF;Ventricles;VEN;;;yes
+5;lAcc_CSF_Vol;Left Accumbens;[ 23 30 ];Left/Right:Accumbens-Area;l;CSF;Striatum;SR;;;yes
+6;rAcc_CSF_Vol;Right Accumbens;[ 23 30 ];Left/Right:Accumbens-Area;r;CSF;Striatum;SR;;;yes
+7;lAmy_CSF_Vol;Left Amygdala;[ 31 32 ];Left/Right:Amygdala;l;CSF;Limbic ;LC;;;yes
+8;rAmy_CSF_Vol;Right Amygdala;[ 31 32 ];Left/Right:Amygdala;r;CSF;Limbic ;LC;;;yes
+9;lBst_CSF_Vol;Left Brainstem;[ 35 ];Both:Brain-Stem;l;CSF;Stem;SE;;;yes
+10;rBst_CSF_Vol;Right Brainstem;[ 35 ];Both:Brain-Stem;r;CSF;Stem;SE;;;yes
+11;lCau_CSF_Vol;Left Caudate;[ 36 37 ];Left/Right:Caudate;l;CSF;Striatum;SR;;;yes
+12;rCau_CSF_Vol;Right Caudate;[ 36 37 ];Left/Right:Caudate;r;CSF;Striatum;SR;;;yes
+13;lExtCbe_CSF_Vol;Left Exterior Cerebellum;[ 38 39 ];Left/Right:Cerebellum-Exterior;l;CSF;Cerebellum;CB;;;yes
+14;rExtCbe_CSF_Vol;Right Exterior Cerebellum;[ 38 39 ];Left/Right:Cerebellum-Exterior;r;CSF;Cerebellum;CB;;;yes
+15;lCbeWM_CSF_Vol;Left Cerebellum White Matter;[ 40 41 ];Left/Right:Cerebellum-White-Matter;l;CSF;Cerebellum;CB;;;yes
+16;rCbeWM_CSF_Vol;Right Cerebellum White Matter;[ 40 41 ];Left/Right:Cerebellum-White-Matter;r;CSF;Cerebellum;CB;;;yes
+17;lCbrWM_CSF_Vol;Left Cerebral White Matter;[ 44 45 ];Left/Right:Cerebral-White-Matter;l;CSF;;;;;yes
+18;rCbrWM_CSF_Vol;Right Cerebral White Matter;[ 44 45 ];Left/Right:Cerebral-White-Matter;r;CSF;;;;;yes
+19;lCSF_CSF_Vol;Left CSF;[ 46 ];Both:CSF;l;CSF;;;;;yes
+20;rCSF_CSF_Vol;Right CSF;[ 46 ];Both:CSF;r;CSF;;;;;yes
+21;lHip_CSF_Vol;Left Hippocampus;[ 47 48 ];Left/Right:Hippocampus;l;CSF;Limbic ;LC;;;yes
+22;rHip_CSF_Vol;Right Hippocampus;[ 47 48 ];Left/Right:Hippocampus;r;CSF;Limbic ;LC;;;yes
+23;lInfLatVen_CSF_Vol;Left Inferior Lateral Ventricle;[ 49 50 ];Left/Right:Inf-Lat-Vent;l;CSF;Ventricles;VEN;;;yes
+24;rInfLatVen_CSF_Vol;Right Inferior Lateral Ventricle;[ 49 50 ];Left/Right:Inf-Lat-Vent;r;CSF;Ventricles;VEN;;;yes
+25;lLatVen_CSF_Vol;Left Lateral Ventricle;[ 51 52 ];Left/Right:Lateral-Ventricle;l;CSF;Ventricles;VEN;;;yes
+26;rLatVen_CSF_Vol;Right Lateral Ventricle;[ 51 52 ];Left/Right:Lateral-Ventricle;r;CSF;Ventricles;VEN;;;yes
+27;lPal_CSF_Vol;Left Pallidum;[ 55 56 ];Left/Right:Pallidum;l;CSF;Striatum;SR;;;yes
+28;rPal_CSF_Vol;Right Pallidum;[ 55 56 ];Left/Right:Pallidum;r;CSF;Striatum;SR;;;yes
+29;lPut_CSF_Vol;Left Putamen;[ 57 58 ];Left/Right:Putamen;l;CSF;Striatum;SR;;;yes
+30;rPut_CSF_Vol;Right Putamen;[ 57 58 ];Left/Right:Putamen;r;CSF;Striatum;SR;;;yes
+31;lThaPro_CSF_Vol;Left Thalamus Proper;[ 59 60 ];Left/Right:Thalamus-Proper;l;CSF;Limbic ;LC;;;yes
+32;rThaPro_CSF_Vol;Right Thalamus Proper;[ 59 60 ];Left/Right:Thalamus-Proper;r;CSF;Limbic ;LC;;;yes
+33;lVenVen_CSF_Vol;Left Ventral Ventricle;[ 61 62 ];Left/Right:Ventral-DC;l;CSF;Ventricles;VEN;;;yes
+34;rVenVen_CSF_Vol;Right Ventral Ventricle;[ 61 62 ];Left/Right:Ventral-DC;r;CSF;Ventricles;VEN;;;yes
+35;lOC_CSF_Vol;Left Optic Chiasm;[ 69 ];Both:Optic-Chiasm;l;CSF;;;;;yes
+36;rOC_CSF_Vol;Right Optic Chiasm;[ 69 ];Both:Optic-Chiasm;r;CSF;;;;;yes
+37;lCbeLoCbe1-5_CSF_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules I-V;[ 71 ];Both:Cerebellar-Vermal-Lobules-I-V;l;CSF;Cerebellum;CB;;;yes
+38;rCbeLoCbe1-5_CSF_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules I-V;[ 71 ];Both:Cerebellar-Vermal-Lobules-I-V;r;CSF;Cerebellum;CB;;;yes
+39;lCbeLoCbe6-7_CSF_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules VI-VII;[ 72 ];Both:Cerebellar-Vermal-Lobules-VI-VII;l;CSF;Cerebellum;CB;;;yes
+40;rCbeLoCbe6-7_CSF_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules VI-VII;[ 72 ];Both:Cerebellar-Vermal-Lobules-VI-VII;r;CSF;Cerebellum;CB;;;yes
+41;lCbeLoCbe8-10_CSF_Vol;Left Cerebellar Lobule Cerebellar Vermal Lobules VIII-X;[ 73 ];Both:Cerebellar-Vermal-Lobules-VIII-X;l;CSF;Cerebellum;CB;;;yes
+42;rCbeLoCbe8-10_CSF_Vol;Right Cerebellar Lobule Cerebellar Vermal Lobules VIII-X;[ 73 ];Both:Cerebellar-Vermal-Lobules-VIII-X;r;CSF;Cerebellum;CB;;;yes
+43;lBasCbr+FobBr_CSF_Vol;Left Basal Cerebrum and Forebrain Brain;[ 75 76 ];Left/Right:Basal-Forebrain;l;CSF;;;;;yes
+44;rBasCbr+FobBr_CSF_Vol;Right Basal Cerebrum and Forebrain Brain;[ 75 76 ];Left/Right:Basal-Forebrain;r;CSF;;;;;yes
+45;lAntCinGy_CSF_Vol;Left Anterior Cingulate Gyrus;[ 100 101 ];Left/Right:ACgG-anterior-cingulate-gyrus;l;CSF;Limbic ;LC;cingulate cortex;;yes
+46;rAntCinGy_CSF_Vol;Right Anterior Cingulate Gyrus;[ 100 101 ];Left/Right:ACgG-anterior-cingulate-gyrus;r;CSF;Limbic ;LC;cingulate cortex;;yes
+47;lAntIns_CSF_Vol;Left Anterior Insula;[ 102 103 ];Left/Right:AIns-anterior-insula;l;CSF;Frontal;FL;insular region;;yes
+48;rAntIns_CSF_Vol;Right Anterior Insula;[ 102 103 ];Left/Right:AIns-anterior-insula;r;CSF;Frontal;FL;insular region;;yes
+49;lAntOrbGy_CSF_Vol;Left Anterior Orbital Gyrus;[ 104 105 ];Left/Right:AOrG-anterior-orbital-gyrus;l;CSF;Frontal;FL;inferior surface;;yes
+50;rAntOrbGy_CSF_Vol;Right Anterior Orbital Gyrus;[ 104 105 ];Left/Right:AOrG-anterior-orbital-gyrus;r;CSF;Frontal;FL;inferior surface;;yes
+51;lAngGy_CSF_Vol;Left Angular Gyrus;[ 106 107 ];Left/Right:AnG-angular-gyrus;l;CSF;Parietal;PL;lateral surface;;yes
+52;rAngGy_CSF_Vol;Right Angular Gyrus;[ 106 107 ];Left/Right:AnG-angular-gyrus;r;CSF;Parietal;PL;lateral surface;;yes
+53;lCal+Cbr_CSF_Vol;Left Calcarine and Cerebrum;[ 108 109 ];Left/Right:Calc-calcarine-cortex;l;CSF;Occipital;OL;medial surface;optional;no
+54;rCal+Cbr_CSF_Vol;Right Calcarine and Cerebrum;[ 108 109 ];Left/Right:Calc-calcarine-cortex;r;CSF;Occipital;OL;medial surface;optional;no
+55;lCenOpe_CSF_Vol;Left Central Operculum;[ 112 113 ];Left/Right:CO-central-operculum;l;CSF;Frontal;FL;opercular region;;yes
+56;rCenOpe_CSF_Vol;Right Central Operculum;[ 112 113 ];Left/Right:CO-central-operculum;r;CSF;Frontal;FL;opercular region;;yes
+57;lCun_CSF_Vol;Left Cuneus;[ 114 115 ];Left/Right:Cun-cuneus;l;CSF;Occipital;OL;medial surface;;yes
+58;rCun_CSF_Vol;Right Cuneus;[ 114 115 ];Left/Right:Cun-cuneus;r;CSF;Occipital;OL;medial surface;;yes
+59;lEnt_CSF_Vol;Left Entorhinal Area;[ 116 117 ];Left/Right:Ent-entorhinal-area;l;CSF;Limbic ;LC;medial temporal cortex;;yes
+60;rEnt_CSF_Vol;Right Entorhinal Area;[ 116 117 ];Left/Right:Ent-entorhinal-area;r;CSF;Limbic ;LC;medial temporal cortex;;yes
+61;lFroOpe_CSF_Vol;Left Frontal Operculum;[ 118 119 ];Left/Right:FO-frontal-operculum;l;CSF;Frontal;FL;opercular region;;yes
+62;rFroOpe_CSF_Vol;Right Frontal Operculum;[ 118 119 ];Left/Right:FO-frontal-operculum;r;CSF;Frontal;FL;opercular region;;yes
+63;lFroPo_CSF_Vol;Left Frontal Pole;[ 120 121 ];Left/Right:FRP-frontal-pole;l;CSF;Frontal;FL;lateral surface;;yes
+64;rFroPo_CSF_Vol;Right Frontal Pole;[ 120 121 ];Left/Right:FRP-frontal-pole;r;CSF;Frontal;FL;lateral surface;;yes
+65;lFusGy_CSF_Vol;Left Fusiform Gyrus;[ 122 123 ];Left/Right:FuG-fusiform-gyrus;l;CSF;Temporal;TL;inferior surface;;yes
+66;rFusGy_CSF_Vol;Right Fusiform Gyrus;[ 122 123 ];Left/Right:FuG-fusiform-gyrus;r;CSF;Temporal;TL;inferior surface;;yes
+67;lRecGy_CSF_Vol;Left Gyrus Rectus;[ 124 125 ];Left/Right:GRe-gyrus-rectus;l;CSF;Frontal;FL;medial surface;optional: is subset of medial frontal cortex;no
+68;rRecGy_CSF_Vol;Right Gyrus Rectus;[ 124 125 ];Left/Right:GRe-gyrus-rectus;r;CSF;Frontal;FL;medial surface;optional: is subset of medial frontal cortex;no
+69;lInfOccGy_CSF_Vol;Left Inferior Occipital Gyrus;[ 128 129 ];Left/Right:IOG-inferior-occipital-gyrus;l;CSF;Occipital;OL;lateral surface;;yes
+70;rInfOccGy_CSF_Vol;Right Inferior Occipital Gyrus;[ 128 129 ];Left/Right:IOG-inferior-occipital-gyrus;r;CSF;Occipital;OL;lateral surface;;yes
+71;lInfTemGy_CSF_Vol;Left Inferior Temporal Gyrus;[ 132 133 ];Left/Right:ITG-inferior-temporal-gyrus;l;CSF;Temporal;TL;lateral surface;;yes
+72;rInfTemGy_CSF_Vol;Right Inferior Temporal Gyrus;[ 132 133 ];Left/Right:ITG-inferior-temporal-gyrus;r;CSF;Temporal;TL;lateral surface;;yes
+73;lLinGy_CSF_Vol;Left Lingual Gyrus;[ 134 135 ];Left/Right:LiG-lingual-gyrus;l;CSF;Occipital;OL;medial surface;;yes
+74;rLinGy_CSF_Vol;Right Lingual Gyrus;[ 134 135 ];Left/Right:LiG-lingual-gyrus;r;CSF;Occipital;OL;medial surface;;yes
+75;lLatOrbGy_CSF_Vol;Left Lateral Orbital Gyrus;[ 136 137 ];Left/Right:LOrG-lateral-orbital-gyrus;l;CSF;Frontal;FL;inferior surface;;yes
+76;rLatOrbGy_CSF_Vol;Right Lateral Orbital Gyrus;[ 136 137 ];Left/Right:LOrG-lateral-orbital-gyrus;r;CSF;Frontal;FL;inferior surface;;yes
+77;lMidCinGy_CSF_Vol;Left Middle Cingulate Gyrus;[ 138 139 ];Left/Right:MCgG-middle-cingulate-gyrus;l;CSF;Limbic ;LC;cingulate cortex;;yes
+78;rMidCinGy_CSF_Vol;Right Middle Cingulate Gyrus;[ 138 139 ];Left/Right:MCgG-middle-cingulate-gyrus;r;CSF;Limbic ;LC;cingulate cortex;;yes
+79;lMedFroCbr_CSF_Vol;Left Medial Frontal Cerebrum;[ 140 141 ];Left/Right:MFC-medial-frontal-cortex;l;CSF;Frontal;FL;medial surface;optional;no
+80;rMedFroCbr_CSF_Vol;Right Medial Frontal Cerebrum;[ 140 141 ];Left/Right:MFC-medial-frontal-cortex;r;CSF;Frontal;FL;medial surface;optional;no
+81;lMidFroGy_CSF_Vol;Left Middle Frontal Gyrus;[ 142 143 ];Left/Right:MFG-middle-frontal-gyrus;l;CSF;Frontal;FL;lateral surface;;yes
+82;rMidFroGy_CSF_Vol;Right Middle Frontal Gyrus;[ 142 143 ];Left/Right:MFG-middle-frontal-gyrus;r;CSF;Frontal;FL;lateral surface;;yes
+83;lMidOccGy_CSF_Vol;Left Middle Occipital Gyrus;[ 144 145 ];Left/Right:MOG-middle-occipital-gyrus;l;CSF;Occipital;OL;lateral surface;optional;no
+84;rMidOccGy_CSF_Vol;Right Middle Occipital Gyrus;[ 144 145 ];Left/Right:MOG-middle-occipital-gyrus;r;CSF;Occipital;OL;lateral surface;optional;no
+85;lMedOrbGy_CSF_Vol;Left Medial Orbital Gyrus;[ 146 147 ];Left/Right:MOrG-medial-orbital-gyrus;l;CSF;Frontal;FL;inferior surface;;yes
+86;rMedOrbGy_CSF_Vol;Right Medial Orbital Gyrus;[ 146 147 ];Left/Right:MOrG-medial-orbital-gyrus;r;CSF;Frontal;FL;inferior surface;;yes
+87;lMedPoCGy_CSF_Vol;Left Medial Postcentral Gyrus;[ 148 149 ];Left/Right:MPoG-postcentral-gyrus-medial-segment;l;CSF;Parietal;PL;medial surface;medial segment;yes
+88;rMedPoCGy_CSF_Vol;Right Medial Postcentral Gyrus;[ 148 149 ];Left/Right:MPoG-postcentral-gyrus-medial-segment;r;CSF;Parietal;PL;medial surface;medial segment;yes
+89;lMedPrcGy_CSF_Vol;Left Medial Precentral Gyrus;[ 150 151 ];Left/Right:MPrG-precentral-gyrus-medial-segment;l;CSF;Frontal;FL;medial surface;medial segment;yes
+90;rMedPrcGy_CSF_Vol;Right Medial Precentral Gyrus;[ 150 151 ];Left/Right:MPrG-precentral-gyrus-medial-segment;r;CSF;Frontal;FL;medial surface;medial segment;yes
+91;lSupMedFroGy_CSF_Vol;Left Superior Medial Frontal Gyrus;[ 152 153 ];Left/Right:MSFG-superior-frontal-gyrus-medial-segment;l;CSF;Frontal;FL;medial surface;medial segment;yes
+92;rSupMedFroGy_CSF_Vol;Right Superior Medial Frontal Gyrus;[ 152 153 ];Left/Right:MSFG-superior-frontal-gyrus-medial-segment;r;CSF;Frontal;FL;medial surface;medial segment;yes
+93;lMidTemGy_CSF_Vol;Left Middle Temporal Gyrus;[ 154 155 ];Left/Right:MTG-middle-temporal-gyrus;l;CSF;Temporal;TL;lateral surface;;yes
+94;rMidTemGy_CSF_Vol;Right Middle Temporal Gyrus;[ 154 155 ];Left/Right:MTG-middle-temporal-gyrus;r;CSF;Temporal;TL;lateral surface;;yes
+95;lOccPo_CSF_Vol;Left Occipital Pole;[ 156 157 ];Left/Right:OCP-occipital-pole;l;CSF;Occipital;OL;lateral surface;;yes
+96;rOccPo_CSF_Vol;Right Occipital Pole;[ 156 157 ];Left/Right:OCP-occipital-pole;r;CSF;Occipital;OL;lateral surface;;yes
+97;lOccFusGy_CSF_Vol;Left Occipital Fusiform Gyrus;[ 160 161 ];Left/Right:OFuG-occipital-fusiform-gyrus;l;CSF;Occipital;OL;inferior surface;optional;no
+98;rOccFusGy_CSF_Vol;Right Occipital Fusiform Gyrus;[ 160 161 ];Left/Right:OFuG-occipital-fusiform-gyrus;r;CSF;Occipital;OL;inferior surface;optional;no
+99;lInfFroGy_CSF_Vol;Left Inferior Frontal Gyrus;[ 162 163 ];Left/Right:OpIFG-opercular-part-of-the-inferior-frontal-gyrus;l;CSF;Frontal;FL;;;yes
+100;rInfFroGy_CSF_Vol;Right Inferior Frontal Gyrus;[ 162 163 ];Left/Right:OpIFG-opercular-part-of-the-inferior-frontal-gyrus;r;CSF;Frontal;FL;;;yes
+101;lInfFroOrbGy_CSF_Vol;Left Inferior Frontal Orbital Gyrus;[ 164 165 ];Left/Right:OrIFG-orbital-part-of-the-inferior-frontal-gyrus;l;CSF;Frontal;FL;;;yes
+102;rInfFroOrbGy_CSF_Vol;Right Inferior Frontal Orbital Gyrus;[ 164 165 ];Left/Right:OrIFG-orbital-part-of-the-inferior-frontal-gyrus;r;CSF;Frontal;FL;;;yes
+103;lPosCinGy_CSF_Vol;Left Posterior Cingulate Gyrus;[ 166 167 ];Left/Right:PCgG-posterior-cingulate-gyrus;l;CSF;Limbic ;LC;cingulate cortex;;yes
+104;rPosCinGy_CSF_Vol;Right Posterior Cingulate Gyrus;[ 166 167 ];Left/Right:PCgG-posterior-cingulate-gyrus;r;CSF;Limbic ;LC;cingulate cortex;;yes
+105;lPCu_CSF_Vol;Left Precuneus;[ 168 169 ];Left/Right:PCu-precuneus;l;CSF;Parietal;PL;medial surface;;yes
+106;rPCu_CSF_Vol;Right Precuneus;[ 168 169 ];Left/Right:PCu-precuneus;r;CSF;Parietal;PL;medial surface;;yes
+107;lParHipGy_CSF_Vol;Left Parahippocampus Gyrus;[ 170 171 ];Left/Right:PHG-parahippocampal-gyrus;l;CSF;Limbic ;LC;medial temporal cortex;;yes
+108;rParHipGy_CSF_Vol;Right Parahippocampus Gyrus;[ 170 171 ];Left/Right:PHG-parahippocampal-gyrus;r;CSF;Limbic ;LC;medial temporal cortex;;yes
+109;lPosIns_CSF_Vol;Left Posterior Insula;[ 172 173 ];Left/Right:PIns-posterior-insula;l;CSF;Frontal;FL;insular region;;yes
+110;rPosIns_CSF_Vol;Right Posterior Insula;[ 172 173 ];Left/Right:PIns-posterior-insula;r;CSF;Frontal;FL;insular region;;yes
+111;lParOpe_CSF_Vol;Left Parietal Operculum;[ 174 175 ];Left/Right:PO-parietal-operculum;l;CSF;Frontal;FL;opercular region;;yes
+112;rParOpe_CSF_Vol;Right Parietal Operculum;[ 174 175 ];Left/Right:PO-parietal-operculum;r;CSF;Frontal;FL;opercular region;;yes
+113;lPoCGy_CSF_Vol;Left Postcentral Gyrus;[ 176 177 ];Left/Right:PoG-postcentral-gyrus;l;CSF;Parietal;PL;lateral surface;;yes
+114;rPoCGy_CSF_Vol;Right Postcentral Gyrus;[ 176 177 ];Left/Right:PoG-postcentral-gyrus;r;CSF;Parietal;PL;lateral surface;;yes
+115;lPosOrbGy_CSF_Vol;Left Posterior Orbital Gyrus;[ 178 179 ];Left/Right:POrG-posterior-orbital-gyrus;l;CSF;Frontal;FL;inferior surface;;yes
+116;rPosOrbGy_CSF_Vol;Right Posterior Orbital Gyrus;[ 178 179 ];Left/Right:POrG-posterior-orbital-gyrus;r;CSF;Frontal;FL;inferior surface;;yes
+117;lPla_CSF_Vol;Left Planum Polare;[ 180 181 ];Left/Right:PP-planum-polare;l;CSF;Temporal;TL;supratemporal surface;optional;no
+118;rPla_CSF_Vol;Right Planum Polare;[ 180 181 ];Left/Right:PP-planum-polare;r;CSF;Temporal;TL;supratemporal surface;optional;no
+119;lPrcGy_CSF_Vol;Left Precentral Gyrus;[ 182 183 ];Left/Right:PrG-precentral-gyrus;l;CSF;Frontal;FL;lateral surface;;yes
+120;rPrcGy_CSF_Vol;Right Precentral Gyrus;[ 182 183 ];Left/Right:PrG-precentral-gyrus;r;CSF;Frontal;FL;lateral surface;;yes
+121;lTem_CSF_Vol;Left Temporal;[ 184 185 ];Left/Right:PT-planum-temporale;l;CSF;Temporal;TL;;;yes
+122;rTem_CSF_Vol;Right Temporal;[ 184 185 ];Left/Right:PT-planum-temporale;r;CSF;Temporal;TL;;;yes
+123;lSCA_CSF_Vol;Left Subcallosal Area;[ 186 187 ];Left/Right:SCA-subcallosal-area;l;CSF;Frontal;FL;medial surface;optional;no
+124;rSCA_CSF_Vol;Right Subcallosal Area;[ 186 187 ];Left/Right:SCA-subcallosal-area;r;CSF;Frontal;FL;medial surface;optional;no
+125;lSupFroGy_CSF_Vol;Left Superior Frontal Gyrus;[ 190 191 ];Left/Right:SFG-superior-frontal-gyrus;l;CSF;Frontal;FL;lateral surface;;yes
+126;rSupFroGy_CSF_Vol;Right Superior Frontal Gyrus;[ 190 191 ];Left/Right:SFG-superior-frontal-gyrus;r;CSF;Frontal;FL;lateral surface;;yes
+127;lCbr+Mot_CSF_Vol;Left Cerebrum and Motor;[ 192 193 ];Left/Right:SMC-supplementary-motor-cortex;l;CSF;Frontal;FL;;;yes
+128;rCbr+Mot_CSF_Vol;Right Cerebrum and Motor;[ 192 193 ];Left/Right:SMC-supplementary-motor-cortex;r;CSF;Frontal;FL;;;yes
+129;lSupMarGy_CSF_Vol;Left Supramarginal Gyrus;[ 194 195 ];Left/Right:SMG-supramarginal-gyrus;l;CSF;Parietal;PL;lateral surface;;yes
+130;rSupMarGy_CSF_Vol;Right Supramarginal Gyrus;[ 194 195 ];Left/Right:SMG-supramarginal-gyrus;r;CSF;Parietal;PL;lateral surface;;yes
+131;lSupOccGy_CSF_Vol;Left Superior Occipital Gyrus;[ 196 197 ];Left/Right:SOG-superior-occipital-gyrus;l;CSF;Occipital;OL;lateral surface;;yes
+132;rSupOccGy_CSF_Vol;Right Superior Occipital Gyrus;[ 196 197 ];Left/Right:SOG-superior-occipital-gyrus;r;CSF;Occipital;OL;lateral surface;;yes
+133;lSupParLo_CSF_Vol;Left Superior Parietal Lobule;[ 198 199 ];Left/Right:SPL-superior-parietal-lobule;l;CSF;Parietal;PL;lateral surface;;yes
+134;rSupParLo_CSF_Vol;Right Superior Parietal Lobule;[ 198 199 ];Left/Right:SPL-superior-parietal-lobule;r;CSF;Parietal;PL;lateral surface;;yes
+135;lSupTemGy_CSF_Vol;Left Superior Temporal Gyrus;[ 200 201 ];Left/Right:STG-superior-temporal-gyrus;l;CSF;Temporal;TL;lateral surface;;yes
+136;rSupTemGy_CSF_Vol;Right Superior Temporal Gyrus;[ 200 201 ];Left/Right:STG-superior-temporal-gyrus;r;CSF;Temporal;TL;lateral surface;;yes
+137;lTemPo_CSF_Vol;Left Temporal Pole;[ 202 203 ];Left/Right:TMP-temporal-pole;l;CSF;Temporal;TL;lateral surface;;yes
+138;rTemPo_CSF_Vol;Right Temporal Pole;[ 202 203 ];Left/Right:TMP-temporal-pole;r;CSF;Temporal;TL;lateral surface;;yes
+139;lInfFroAngGy_CSF_Vol;Left Inferior Frontal Angular Gyrus;[ 204 205 ];Left/Right:TrIFG-triangular-part-of-the-inferior-frontal-gyrus;l;CSF;Frontal;FL;;;yes
+140;rInfFroAngGy_CSF_Vol;Right Inferior Frontal Angular Gyrus;[ 204 205 ];Left/Right:TrIFG-triangular-part-of-the-inferior-frontal-gyrus;r;CSF;Frontal;FL;;;yes
+141;lTemTraGy_CSF_Vol;Left Temporal Transverse Gyrus;[ 206 207 ];Left/Right:TTG-transverse-temporal-gyrus;l;CSF;Temporal;TL;supratemporal surface;optional;no
+142;rTemTraGy_CSF_Vol;Right Temporal Transverse Gyrus;[ 206 207 ];Left/Right:TTG-transverse-temporal-gyrus;r;CSF;Temporal;TL;supratemporal surface;optional;no
+999;TIV;TIV;;;;;TIV;TIV;;;yes
