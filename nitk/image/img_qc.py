@@ -28,6 +28,7 @@ def plot_pca(X, df_description):
     plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
     plt.axis('equal')
     plt.tight_layout()
+    plt.savefig("pca.pdf")
     plt.show()
 
 def compute_mean_correlation(X, df_description):
@@ -48,8 +49,10 @@ def compute_mean_correlation(X, df_description):
     cmap = sns.color_palette("RdBu_r", 110)
     # Draw the heatmap with the mask and correct aspect ratio
     ax = sns.heatmap(Freorder, mask=None, cmap=cmap, vmin=-1, vmax=1, center=0)
+    plt.savefig("corr_mat.pdf")
     plt.show()
     cor = pd.DataFrame(dict(participant_id=participant_ids, corr_mean=F_mean[sort_idx]))
+    cor = cor.reindex(['participant_id', 'corr_mean'], axis='columns')
     return cor
 
 def pdf_plottings(nii_filenames, mean_corr, output_pdf, limit=None):
@@ -60,7 +63,8 @@ def pdf_plottings(nii_filenames, mean_corr, output_pdf, limit=None):
         fig, ax = plt.subplots(figsize=(15, 10))
         nii = nibabel.load(nii_file)
         plotting.plot_anat(nii, figure=fig, axes=ax, dim=-1,
-                           title='Subject %s with mean correlation %.3f' % (mean_corr[i][0], mean_corr[i][1]))
+                           title='Subject %s with mean correlation %.3f' % (mean_corr[i][0], mean_corr[i][1]),
+                           cut_coords=(-5, 0, 0))
         plt.subplots_adjust(wspace=0, hspace=0, top=0.9, bottom=0.1)
         pdf.savefig()
         plt.close(fig)
@@ -70,7 +74,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='A list of .nii files', required=True, nargs='+', type=str)
     parser.add_argument('--mask', help='A list of .nii masks or a single .nii mask', nargs='+', type=str)
-    parser.add_argument('--output_csv', help='The output path to the .csv file', nargs=1, default='mean_cor.csv', type=str)
+    parser.add_argument('--output_tsv', help='The output path to the .tsv file', nargs=1, default='mean_cor.tsv', type=str)
     parser.add_argument('--output_pdf', help='The output path to the .pdf file', nargs=1, default='nii_plottings.pdf', type=str)
     parser.add_argument('--limit', help='The max number of slice to plot', default=50, type=int)
 
@@ -96,9 +100,7 @@ if __name__ == "__main__":
 
     plot_pca(imgs_arr, df)
     mean_corr = compute_mean_correlation(imgs_arr, df)
-    mean_corr.to_csv(options.output_csv, index=False)
-
+    mean_corr.to_csv(options.output_tsv, index=False, sep='\t')
     mean_corr = mean_corr.values
     nii_filenames_sorted = [df[df['participant_id'].eq(id)].path.values[0] for (id, _) in mean_corr]
     pdf_plottings(nii_filenames_sorted, mean_corr, options.output_pdf, limit=min(options.limit, len(nii_filenames_sorted)))
-
