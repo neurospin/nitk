@@ -75,7 +75,7 @@ pd.set_option('display.width', 1000)  # Set the total width to a large number
 
 # %%
 
-config_file = '/home/ed203246/git/nitk/models/study-rlink_mod-cat12vbm_type-roi+age+sex+site_lab-M00_v-4_resid-age+sex+site.json'
+config_file = '/home/ed203246/git/nitk/scripts/study-rlink_mod-cat12vbm_type-roi+age+sex+site_lab-M00_v-4_task-predLiResponse/20_supervised_classification_config.json'
 
 with open(config_file) as json_file:
     config = json.load(json_file)
@@ -105,6 +105,21 @@ config['cachedir'] = os.path.splitext(config_file)[0] + "/cachedir"
 # Import the module
 import_module_from_path(config["models_path"])
 from classification_models import make_models
+
+
+file_path = config["models_path"]
+def import_module_from_path(file_path):
+
+    # Extract the module name from the file path
+    module_name = os.path.splitext(os.path.basename(file_path))[0]
+
+    # Use importlib to load the module from the file path
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+
+    return module
 
 def print_log(*args):
     with open(config['log_filename'], "a") as f:
